@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\User as UserResource;
 use App\User;
 use Spatie\Permission\Models\Role;
 use DB;
@@ -22,8 +23,10 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        // return view('users.index',compact('data'))
+        //     ->with('i', ($request->input('page', 1) - 1) * 5);
+
+            return UserResource::collection($data);
     }
 
 
@@ -47,26 +50,42 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'employee_id' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
-            'roles' => 'required'
-        ]);
+        // $this->validate($request, [
+        //     'first_name' => 'required',
+        //     'last_name' => 'required',
+        //     'employee_id' => 'required',
+        //     'email' => 'required|email|unique:users,email',
+        //     'password' => 'required|same:confirm-password',
+        //     'roles' => 'required'
+        // ]);
 
 
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
+        // $input = $request->all();
+        // $input['password'] = Hash::make($input['password']);
 
 
-        $user = User::create($input);
+        // $user = User::create($input);
+        // $user->assignRole($request->input('roles'));
+
+
+        // return redirect()->route('users.index')
+        //                 ->with('success','User created successfully');
+
+
+        $user = $request->isMethod('put') ? User::findOrFail($request->user_id) : new User;
+        
+        $user->id = $request->input('user_id');
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->employee_id = $request->input('employee_id');
+        $user->email = $request->input('email');
+        $user->password =  Hash::make($request->input('password'));
         $user->assignRole($request->input('roles'));
+        
+        if($user->save()){
+            return new UserResource($user);
+        }
 
-
-        return redirect()->route('users.index')
-                        ->with('success','User created successfully');
     }
 
 
@@ -78,8 +97,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('users.show',compact('user'));
+        $user = User::findOrFail($id);
+        // return view('users.show',compact('user'));
+
+        return new UserResource($user);
     }
 
 
@@ -148,8 +169,16 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+        // User::find($id)->delete();
+        // return redirect()->route('users.index')
+        //                 ->with('success','User deleted successfully');
+                        
+        $user = User::findOrFail($id);
+       
+        if($user->delete()){
+            return new UserResource($user);
+        }
     }
+        
+
 }
