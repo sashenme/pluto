@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Question;
-use App\QuestionsSet;
-use App\User;
-use App\Http\Resources\Question as QuestionResource;
+use App\Answer;
+use App\Http\Resources\Answer as AnswerResource;
 
-class QuestionController extends Controller
+class AnswerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,9 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $Question = Question::orderBy('id','DESC')->paginate(5);
+        $Answer = Answer::orderBy('id','DESC')->paginate(5);
 
-            return QuestionResource::collection($Question);
+            return AnswerResource::collection($Answer);
     }
 
     /**
@@ -40,15 +38,16 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $question = $request->isMethod('put') ? Question::findOrFail($request->question_id) : new Question;
+        $question = $request->isMethod('put') ? Answer::findOrFail($request->answer_id) : new Answer;
         
-        $question->id = $request->input('question_id');
-        $question->questions_set_id = $request->input('questions_set_id');
+        $question->id = $request->input('answer_id');
         $question->user_id = $request->input('user_id');
-        $question->title = $request->input('title');
+        $question->question_id = $request->input('question_id');
+        $question->name = $request->input('name');
+        $question->correct = $request->input('correct');
         
         if($question->save()){
-            return new QuestionResource($question);
+            return new AnswerResource($question);
         }
     }
 
@@ -60,8 +59,8 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $question =  Question::findOrFail($id);
-        return new QuestionResource($question);
+        $question =  Answer::findOrFail($id);
+        return new AnswerResource($question);
     }
 
     /**
@@ -95,10 +94,10 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $question = Question::findOrFail($id);
+        $question = Answer::findOrFail($id);
        
         if($question->delete()){
-            return new QuestionResource($question);
+            return new AnswerResource($question);
         }
     }
 }

@@ -24,7 +24,6 @@ Route::post('user','UserController@store');
 Route::put('user','UserController@store');
 Route::delete('user/{id}','UserController@destroy');
 
-
 Route::get('questions-sets','QuestionsSetController@index');
 Route::get('questions-set/{id}','QuestionsSetController@show');
 Route::post('questions-sets','QuestionsSetController@store'); 
@@ -36,3 +35,10 @@ Route::get('question/{id}','QuestionController@show');
 Route::post('questions','QuestionController@store'); 
 Route::put('question','QuestionController@store');
 Route::delete('question/{id}','QuestionController@destroy');
+
+Route::resource('answers','AnswerController');
+Route::get('answers','AnswerController@index');
+Route::get('answer/{id}','AnswerController@show');
+Route::post('answers','AnswerController@store'); 
+Route::put('answer','AnswerController@store');
+Route::delete('answer/{id}','AnswerController@destroy');
