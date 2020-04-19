@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model
+class Response extends Model
 {
     protected $fillable = [
-        'question_id', 'user_id', 'name','correct'
+        'question_id', 'user_id', 'answer_id','correct'
     ];
 
     public function users()
@@ -17,5 +17,9 @@ class Answer extends Model
     public function questions()
     {
         return $this->belongsTo('App\Questions','question_id');
+    }
+    public function answers()
+    {
+        return $this->belongsTo('App\Answers','answer_id');
     }
 }
