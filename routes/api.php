@@ -47,3 +47,9 @@ Route::get('response/{id}','ResponseController@show');
 Route::post('responses','ResponseController@store'); 
 Route::put('response','ResponseController@store');
 Route::delete('response/{id}','ResponseController@destroy');
+
+Route::get('logs','LogController@index');
+Route::get('log/{id}','LogController@show');
+Route::post('logs','LogController@store'); 
+Route::put('log','LogController@store');
+Route::delete('log/{id}','LogController@destroy');
