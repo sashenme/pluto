@@ -53,3 +53,9 @@ Route::get('log/{id}','LogController@show');
 Route::post('logs','LogController@store'); 
 Route::put('log','LogController@store');
 Route::delete('log/{id}','LogController@destroy');
+
+Route::get('feedbacks','FeedbackController@index');
+Route::get('feedback/{id}','FeedbackController@show');
+Route::post('feedbacks','FeedbackController@store'); 
+Route::put('feedback','FeedbackController@store');
+Route::delete('feedback/{id}','FeedbackController@destroy');
