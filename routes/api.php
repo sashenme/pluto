@@ -30,3 +30,9 @@ Route::get('questions-set/{id}','QuestionsSetController@show');
 Route::post('questions-sets','QuestionsSetController@store'); 
 Route::put('questions-set','QuestionsSetController@store');
 Route::delete('questions-set/{id}','QuestionsSetController@destroy');
+
+Route::get('questions','QuestionController@index');
+Route::get('question/{id}','QuestionController@show');
+Route::post('questions','QuestionController@store'); 
+Route::put('question','QuestionController@store');
+Route::delete('question/{id}','QuestionController@destroy');
