@@ -32,8 +32,14 @@ class HomeController extends Controller
         $forced_question_id = $request->id;
         $questions_set = QuestionsSet::where('schedule_date', Carbon::today())->get();
         $questions_set_id  = $questions_set->pluck('id');
+ 
+        //Stop if no question set available
+        if ($questions_set_id->count() == 0)
+            return 'no questions for today'; //return redirect()->view()'';
+
         $questions = Question::where('questions_set_id', $questions_set_id)->first();
 
+        //Show question given from param
         if (!empty($forced_question_id)) {
 
 
@@ -44,6 +50,9 @@ class HomeController extends Controller
                 return redirect()->route('home');
             }
         } else {
+
+            //Show next question for the last response
+
             $lastResponse = Response::where('user_id', Auth::id())->orderBy('id', 'desc')->first();
 
             if (!empty($lastResponse)) {
@@ -64,12 +73,9 @@ class HomeController extends Controller
                     return redirect()->route('test');
             } else {
 
+                //Show first question
 
                 $question_id  = $questions->id;
-
-                // $answers
-                // return $questions;
-                // return $answers;
 
             }
         }

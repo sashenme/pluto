@@ -16,12 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['middleware' => ['role:admin']], function() {
 Route::get('/admin', function () {
     return view('admin');
 });
+});
 
 Route::get('/userhome', function () {
-    return view('user.home');
+    return 'welcome';
 })->name('test');
 Route::get('/adminhome', function () {
     return view('admin.home');
@@ -29,11 +32,11 @@ Route::get('/adminhome', function () {
 
 Auth::routes();
 
-Route::get('/home/{id?}', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => ['auth']], function() {
+
+Route::group(['middleware' => ['role:user|admin']], function() {
     Route::resource('roles','RoleController');
     Route::resource('users','UserController');
     Route::resource('responses','ResponseController');
-    
+    Route::get('/home/{id?}', 'HomeController@index')->name('home');
 });
