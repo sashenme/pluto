@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
 use Illuminate\Http\Request;
 use App\Response;
+use App\Question;
 use App\Http\Resources\Response as ResponseResource;
+use Illuminate\Support\Facades\Auth;
 
 class ResponseController extends Controller
 {
@@ -15,9 +18,9 @@ class ResponseController extends Controller
      */
     public function index()
     {
-        $Response = Response::orderBy('id','DESC')->paginate(5);
+        $Response = Response::orderBy('id', 'DESC')->paginate(5);
 
-            return ResponseResource::collection($Response);
+        return ResponseResource::collection($Response);
     }
 
     /**
@@ -38,16 +41,43 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        $response = $request->isMethod('put') ? Response::findOrFail($request->response_id) : new Response;
+        // $response = $request->isMethod('put') ? Response::findOrFail($request->response_id) : new Response;
+        // $response->id = $request->input('response_id');
+        $next = $request->input('next');
+        $answer = $request->input('answer_id');
+        $question_id = $request->input('question_id');
         
-        $response->id = $request->input('response_id');
-        $response->user_id = $request->input('user_id');
+        $questions_set_id = Question::find($question_id)->questions_set_id;
+
+        $questions = Question::where('questions_set_id',$questions_set_id)->get();
+
+        foreach($questions as $question){
+            if($question->id <= $question_id)
+            continue;
+
+            $nextQuestionId = $question->id;
+        }
+        // var_dump($nextQuestionId);exit;
+
+        $isCorrect = Answer::where('id', $answer)->pluck('correct')->first();
+
+        $correctAnswer = Answer::where('question_id',$question_id)->where('correct',1)->pluck('name');
+
+        $response =   new Response;
+        $response->user_id = Auth::id();
         $response->question_id = $request->input('question_id');
         $response->answer_id = $request->input('answer_id');
-        $response->correct = $request->input('correct');
-        
-        if($response->save()){
-            return new ResponseResource($response);
+
+    $response->correct = $isCorrect == '1' ? 1 : 0;
+
+        if ($response->save()) {
+            if ($isCorrect == '1') { 
+                return redirect()->route('home')->with(['status'=>'success','message'=>'Your answer is correct']);
+    
+            }else{ 
+                return redirect()->route('home')->with(['status'=>'danger','message'=>'Your answer is wrong, correct answer is '.$correctAnswer[0]]);
+    
+            }
         }
     }
 
@@ -95,8 +125,8 @@ class ResponseController extends Controller
     public function destroy($id)
     {
         $response = Response::findOrFail($id);
-       
-        if($response->delete()){
+
+        if ($response->delete()) {
             return new ResponseResource($response);
         }
     }

@@ -22,16 +22,18 @@ Route::get('/admin', function () {
 
 Route::get('/userhome', function () {
     return view('user.home');
-});
+})->name('test');
 Route::get('/adminhome', function () {
     return view('admin.home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/{id?}', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles','RoleController');
     Route::resource('users','UserController');
+    Route::resource('responses','ResponseController');
+    
 });
