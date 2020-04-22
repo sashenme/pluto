@@ -50,7 +50,15 @@
                 @if($dailyQuiz)
                 <a href="{{route('dailyQuiz')}}" class="btn btn-info text-center mt-5">Answer to Daily Quiz</a>
                 @else
-                <p>You have answered all questions for today!. Good job!</p>
+                @if(session()->has('status'))
+                <div class="alert alert-{{session('status')}}">
+                    {{ session('message') }}
+                </div>
+                @endif
+                <p>Good Job! You have answered all questions for today!
+                    
+                {{$correctAnswers}}/2
+                </p>
                 @endif
                 @else
                 <p>No Daily Ingesions for today</p>

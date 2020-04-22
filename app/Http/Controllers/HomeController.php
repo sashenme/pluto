@@ -52,9 +52,9 @@ class HomeController extends Controller
                 $dailyQuiz = false;
         }
 
-
-      
-        return view('user.home')->with(['questions_set' => $questions_set, 'dailyQuiz' => $dailyQuiz]);
+ 
+        $correctAnswers =  Response::where('user_id', Auth::id())->where('correct', 1)->whereDate('updated_at',Carbon::today())->count();
+        return view('user.home')->with(['questions_set' => $questions_set, 'dailyQuiz' => $dailyQuiz, 'correctAnswers' => $correctAnswers]);
     }
 
 
@@ -101,11 +101,14 @@ class HomeController extends Controller
                     $questions = Question::find($question_id);
                 }
 
-                if (empty($question_id))
-                    return 'ohe okkoma karala eii.. ela kollek oya';
-                // return redirect()->route('home'); //when he answer all
+                if (empty($question_id)) {
+                    $status =    $request->session()->get('status');
+                    
+                    $message =    $request->session()->get('message');
 
-
+                    
+                    return redirect()->route('home')->with(['status' =>  $status, 'message' => $message]); //when he answer all
+                }
             } else {
 
                 //Show first question
@@ -114,8 +117,7 @@ class HomeController extends Controller
             }
         }
 
-        $answers = Answer::where('question_id', $question_id)->get();
-
+       
         return view('user.dailyQuiz')->with(['questions_set' => $questions_set, 'questions' => $questions]);
     }
 }
