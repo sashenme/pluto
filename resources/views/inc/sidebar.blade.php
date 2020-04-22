@@ -31,7 +31,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/addQuizSet" class="nav-link">
+            <a href="/questionssets/create" class="nav-link">
               <i class="nav-icon fas fa-list-ul"></i>
               <p>
                 Question Sets

@@ -13,11 +13,12 @@ class QuestionsSetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $questionsSet = QuestionsSet::orderBy('id','DESC')->paginate(5);
 
-            return QuestionsSetResource::collection($questionsSet);
+        return view('admin.addQuizSet',compact('questionssets'))
+        ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
