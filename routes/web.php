@@ -43,4 +43,6 @@ Route::group(['middleware' => ['auth','role:admin']], function () {
     Route::get('/admin', function () {
         return view('admin.home');
     })->name('admin');
+
+    Route::post('/user/{id}/updateUser', 'UserController@update')->name('updateUser');
 });
