@@ -18,12 +18,12 @@
           <a href="#" class="d-block">{{{ Auth::user()->first_name}}}</a>
         </div>
       </div>
-      
+      @role('admin')
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('users.index')}}" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Users
@@ -48,6 +48,7 @@
           </li>
         </ul>
       </nav>
+      @endrole
       <!-- Sidebar Menu -->
 
       <!-- /.sidebar-menu -->
