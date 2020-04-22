@@ -18,11 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => ['role:admin']], function() {
-Route::get('/admin', function () {
-    return view('admin');
-});
-});
+
 
 Route::get('/userhome', function () {
     return view('user.home');
@@ -35,10 +31,16 @@ Auth::routes();
 
 
 
-Route::group(['middleware' => ['role:user|admin']], function() {
-    Route::resource('roles','RoleController');
-    Route::resource('users','UserController');
-    Route::resource('responses','ResponseController');
-    Route::get('/home', 'HomeController@index')->name('home'); 
+Route::group(['middleware' => ['role:user|admin']], function () {
+    Route::resource('roles', 'RoleController');
+    Route::resource('users', 'UserController');
+    Route::resource('responses', 'ResponseController');
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/daily-quiz/{id?}', 'HomeController@dailyQuiz')->name('dailyQuiz');
+});
+
+Route::group(['middleware' => ['auth','role:admin']], function () {
+    Route::get('/admin', function () {
+        return view('admin.home');
+    })->name('admin');
 });

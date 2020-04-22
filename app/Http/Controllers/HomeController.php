@@ -6,6 +6,7 @@ use App\Answer;
 use App\Question;
 use App\QuestionsSet;
 use App\Response;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
+        $admin = User::findOrFail(Auth::id())->hasRole('admin');
+
+       if($admin)
+        return redirect()->route('admin');
+
         $questions_set = QuestionsSet::where('schedule_date', Carbon::today())->get();
         $dailyQuiz = true;
 
