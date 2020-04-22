@@ -50,41 +50,41 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'employee_id' => 'required',
-        //     'email' => 'required|email|unique:users,email',
-        //     'password' => 'required|same:confirm-password',
-        //     'roles' => 'required'
-        // ]);
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'employee_id' => 'required|unique:users',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|same:confirm_password',
+            'roles' => 'required'
+        ]);
 
 
-        // $input = $request->all();
-        // $input['password'] = Hash::make($input['password']);
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
 
 
-        // $user = User::create($input);
-        // $user->assignRole($request->input('roles'));
-
-
-        // return redirect()->route('users.index')
-        //                 ->with('success','User created successfully');
-
-
-        $user = $request->isMethod('put') ? User::findOrFail($request->user_id) : new User;
-        
-        $user->id = $request->input('user_id');
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->employee_id = $request->input('employee_id');
-        $user->email = $request->input('email');
-        $user->password =  Hash::make($request->input('password'));
+        $user = User::create($input);
         $user->assignRole($request->input('roles'));
+
+
+        return redirect()->route('users.index')
+                        ->with('success','User created successfully');
+
+
+        // $user = $request->isMethod('put') ? User::findOrFail($request->user_id) : new User;
         
-        if($user->save()){
-            return new UserResource($user);
-        }
+        // $user->id = $request->input('user_id');
+        // $user->first_name = $request->input('first_name');
+        // $user->last_name = $request->input('last_name');
+        // $user->employee_id = $request->input('employee_id');
+        // $user->email = $request->input('email');
+        // $user->password =  Hash::make($request->input('password'));
+        // $user->assignRole($request->input('roles'));
+        
+        // if($user->save()){
+        //     return new UserResource($user);
+        // }
 
     }
 

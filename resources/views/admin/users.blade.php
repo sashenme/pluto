@@ -17,10 +17,50 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body" style="display: block;">
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
 
-                <form action="{{route('responses.store')}}" method="POST">
+                <form action="{{route('users.store')}}" method="POST">
                     {{csrf_field()}}
-
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="" value="{{old('first_name')}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="" value="{{old('last_name')}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="employee_id">Employee ID</label>
+                        <input type="text" class="form-control" name="employee_id" id="employee_id" placeholder="" value="{{old('employee_id')}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="" value="{{old('email')}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="" value="{{old('password')}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="" value="{{old('confirm_password')}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="roles">Role</label>
+                        <select class="form-control" name="roles" id="roles">
+                            <option value="user" {{old('roles') == 'user' ? 'selected' : ''}}>User</option>
+                            <option value="admin" {{old('roles') == 'admin' ? 'selected' : ''}}>Admin</option>
+                        </select>
+                    </div>
 
 
 
