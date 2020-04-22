@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-collapse">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="dist/img/logo-310x310.png" alt="AdminLTE Logo" class="brand-image elevation-3"
+      <img src="./dist/img/logo-310x310.png" alt="AdminLTE Logo" class="brand-image elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">PlutoPro</span>
     </a>
@@ -12,7 +12,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+          <img src="./dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{{ Auth::user()->first_name}}}</a>
@@ -21,7 +21,7 @@
       @role('admin')
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
+
           <li class="nav-item">
             <a href="{{route('users.index')}}" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
@@ -31,7 +31,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"> 
+            <a href="/addQuizSet" class="nav-link">
               <i class="nav-icon fas fa-list-ul"></i>
               <p>
                 Question Sets
@@ -57,4 +57,4 @@
   </aside>
 
 
-  
+

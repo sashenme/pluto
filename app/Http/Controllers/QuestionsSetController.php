@@ -27,7 +27,7 @@ class QuestionsSetController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.addQuizSet');
     }
 
     /**
@@ -39,12 +39,12 @@ class QuestionsSetController extends Controller
     public function store(Request $request)
     {
         $questions_set = $request->isMethod('put') ? QuestionsSet::findOrFail($request->questions_set_id) : new QuestionsSet;
-        
+
         $questions_set->id = $request->input('questions_set_id');
         $questions_set->title = $request->input('title');
         $questions_set->description = $request->input('description');
         $questions_set->schedule_date = $request->input('schedule_date');
-        
+
         if($questions_set->save()){
             return new QuestionsSetResource($questions_set);
         }
@@ -94,7 +94,7 @@ class QuestionsSetController extends Controller
     public function destroy($id)
     {
         $questions_set = QuestionsSet::findOrFail($id);
-       
+
         if($questions_set->delete()){
             return new QuestionsSetResource($questions_set);
         }
