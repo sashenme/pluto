@@ -72,10 +72,10 @@ class ResponseController extends Controller
 
         if ($response->save()) {
             if ($isCorrect == '1') { 
-                return redirect()->route('home')->with(['status'=>'success','message'=>'Your answer is correct']);
+                return redirect()->route('dailyQuiz')->with(['status'=>'success','message'=>'Your answer is correct']);
     
             }else{ 
-                return redirect()->route('home')->with(['status'=>'danger','message'=>'Your answer is wrong, correct answer is '.$correctAnswer[0]]);
+                return redirect()->route('dailyQuiz')->with(['status'=>'danger','message'=>'Your answer is wrong, correct answer is '.$correctAnswer[0]]);
     
             }
         }

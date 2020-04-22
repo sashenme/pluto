@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,7 @@ Route::get('/admin', function () {
 });
 
 Route::get('/userhome', function () {
-    return 'welcome';
+    return view('user.home');
 })->name('test');
 Route::get('/adminhome', function () {
     return view('admin.home');
@@ -38,5 +39,6 @@ Route::group(['middleware' => ['role:user|admin']], function() {
     Route::resource('roles','RoleController');
     Route::resource('users','UserController');
     Route::resource('responses','ResponseController');
-    Route::get('/home/{id?}', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home'); 
+    Route::get('/daily-quiz/{id?}', 'HomeController@dailyQuiz')->name('dailyQuiz');
 });

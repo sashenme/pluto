@@ -27,15 +27,47 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index()
+    {
+        $questions_set = QuestionsSet::where('schedule_date', Carbon::today())->get();
+        $dailyQuiz = true;
+
+
+        $lastResponse = Response::where('user_id', Auth::id())->orderBy('id', 'desc')->first();
+
+        if (!empty($lastResponse)) {
+            $lastResponseQuestion_id = $lastResponse->question_id;
+            $questions_set_idx = Question::find($lastResponseQuestion_id)->questions_set_id;
+            $questions_ = Question::where('questions_set_id', $questions_set_idx)->get();
+
+            foreach ($questions_ as $question) {
+                if ($question->id <= $lastResponseQuestion_id)
+                    continue;
+
+                //next question id
+                $question_id = $question->id;
+            }
+
+            if (empty($question_id))
+                $dailyQuiz = false;
+        }
+
+
+      
+        return view('user.home')->with(['questions_set' => $questions_set, 'dailyQuiz' => $dailyQuiz]);
+    }
+
+
+    public function dailyQuiz(Request $request)
     {
         $forced_question_id = $request->id;
         $questions_set = QuestionsSet::where('schedule_date', Carbon::today())->get();
         $questions_set_id  = $questions_set->pluck('id');
- 
+
         //Stop if no question set available
         if ($questions_set_id->count() == 0)
-            return 'no questions for today'; //return redirect()->view()'';
+            // return 'no questions for today'; //return redirect()->view()'';
+            return view('user.empty')->with('message', 'No Questions for today!');
 
         $questions = Question::where('questions_set_id', $questions_set_id)->first();
 
@@ -70,18 +102,20 @@ class HomeController extends Controller
                 }
 
                 if (empty($question_id))
-                    return redirect()->route('test');
+                    return 'ohe okkoma karala eii.. ela kollek oya';
+                // return redirect()->route('home'); //when he answer all
+
+
             } else {
 
                 //Show first question
 
                 $question_id  = $questions->id;
-
             }
         }
 
         $answers = Answer::where('question_id', $question_id)->get();
 
-        return view('user.home')->with(['questions_set' => $questions_set, 'questions' => $questions]);
+        return view('user.dailyQuiz')->with(['questions_set' => $questions_set, 'questions' => $questions]);
     }
 }
