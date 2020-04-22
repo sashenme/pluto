@@ -27,6 +27,8 @@ Route::get('/adminhome', function () {
     return view('admin.home');
 });
 
+
+
 Auth::routes();
 
 
@@ -42,7 +44,7 @@ Route::group(['middleware' => ['role:user|admin']], function () {
 Route::group(['middleware' => ['auth','role:admin']], function () {
     Route::get('/admin', function () {
         return view('admin.home');
-    })->name('admin');
-
+    })->name('admin'); 
     Route::post('/user/{id}/updateUser', 'UserController@update')->name('updateUser');
+    Route::resource('questionssets', 'QuestionsSetController');
 });
