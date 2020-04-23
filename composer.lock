@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2cfac39a61e85956cd4993a44b21533",
+    "content-hash": "eabec83da744249aa19f31776db42baf",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1158,16 +1158,16 @@
         },
         {
             "name": "laravel/ui",
-            "version": "v2.0.1",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
-                "reference": "47a0a1dac76f5e73803c86e1f38b2c7e0ae7fa83"
+                "reference": "ec838c75ba1886d014c5465b1ecc79b2071f46c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/47a0a1dac76f5e73803c86e1f38b2c7e0ae7fa83",
-                "reference": "47a0a1dac76f5e73803c86e1f38b2c7e0ae7fa83",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/ec838c75ba1886d014c5465b1ecc79b2071f46c7",
+                "reference": "ec838c75ba1886d014c5465b1ecc79b2071f46c7",
                 "shasum": ""
             },
             "require": {
@@ -1209,7 +1209,7 @@
                 "laravel",
                 "ui"
             ],
-            "time": "2020-03-03T20:16:46+00:00"
+            "time": "2020-03-03T13:43:00+00:00"
         },
         {
             "name": "laravelcollective/html",

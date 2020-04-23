@@ -14,11 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
+
         Role::create(['name' => 'user']);
         Role::create(['name' => 'admin']);
 
         User::create([
+            'id' => 1,
             'first_name' => 'Default',
             'last_name' => 'Admin',
             'employee_id' => '0000',
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 2,
             'first_name' => 'Default',
             'last_name' => 'User',
             'employee_id' => '0001',
@@ -38,9 +40,5 @@ class DatabaseSeeder extends Seeder
         $user->assignRole('admin');
         $user = User::find(2);
         $user->assignRole('user');
-
-
-        $this->call(DummyQuestionsSeeder::class);
-
     }
 }
