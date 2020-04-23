@@ -46,8 +46,7 @@ class QuestionController extends Controller
             'questions_set_id' => 'required',
             'title' => 'required',
             'name.*' => 'required',
-            'reason.*' => 'required',
-            'correct.*' => 'required|boolean',
+            'reason.*' => 'required', 
         ]);
 
         $question = $request->isMethod('put') ? Question::findOrFail($request->question_id) : new Question;
