@@ -31,7 +31,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/questionssets/create" class="nav-link">
+            <a href="{{route('questions-sets.index')}}" class="nav-link">
               <i class="nav-icon fas fa-list-ul"></i>
               <p>
                 Question Sets

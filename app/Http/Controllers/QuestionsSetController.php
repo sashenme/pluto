@@ -15,10 +15,11 @@ class QuestionsSetController extends Controller
      */
     public function index(Request $request)
     {
-        $questions_sets = QuestionsSet::orderBy('id','DESC')->paginate(5);
-
-        return view('admin.addQuizSet',compact('questions_sets'))
-        ->with('i', ($request->input('page', 1) - 1) * 5);
+        $questions_sets = QuestionsSet::orderBy('id', 'DESC')->paginate(5);
+        $edit = false;
+        return view('admin.addQuizSet', compact('questions_sets', 'edit'))
+            ->with('i', ($request->input('page', 1) - 1) * 5)
+            ->with('success','Questions Set added successfully');
     }
 
     /**
@@ -42,7 +43,7 @@ class QuestionsSetController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'schedule_date' => 'required|date',
+            'schedule_date' => 'required|date|date_format:Y-m-d|after:yesterday',
         ]);
 
 
@@ -53,7 +54,7 @@ class QuestionsSetController extends Controller
         $questions_set->description = $request->input('description');
         $questions_set->schedule_date = $request->input('schedule_date');
 
-        if($questions_set->save()){
+        if ($questions_set->save()) {
             // return new QuestionsSetResource($questions_set);
             return redirect()->back();
         }
@@ -79,7 +80,10 @@ class QuestionsSetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $questions_set = QuestionsSet::find($id);
+        $edit = true;
+        $questions_sets = QuestionsSet::orderBy('id', 'DESC')->paginate(5);
+        return view('admin.addQuizSet', compact('questions_set', 'questions_sets', 'edit'));
     }
 
     /**
@@ -91,7 +95,18 @@ class QuestionsSetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'schedule_date' => 'required|date|date_format:Y-m-d|after:yesterday',
+        ]);
+
+        $input = $request->all();
+        $questions_set = QuestionsSet::find($id);
+        $questions_set->update($input);
+
+        return redirect()->route('questions-sets.index')
+                        ->with('success','Questions Set updated successfully');
     }
 
     /**
@@ -104,7 +119,7 @@ class QuestionsSetController extends Controller
     {
         $questions_set = QuestionsSet::findOrFail($id);
 
-        if($questions_set->delete()){
+        if ($questions_set->delete()) {
             return new QuestionsSetResource($questions_set);
         }
     }

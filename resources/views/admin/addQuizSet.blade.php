@@ -7,7 +7,7 @@
     <div class="col-lg-4">
         <div class="card success">
             <div class="card-header">
-                <h3 class="card-title">Add Question Set</h3>
+                <h3 class="card-title">{{$edit ? 'Edit' : 'Add'}} Question Set</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                     </button>
@@ -25,20 +25,24 @@
                         </ul>
                     </div>
                     @endif
-
-                    <form action="{{route('questions-sets.store')}}" method="POST">
+                    @if(!is_null(session('success')))
+                    <div class="alert alert-success">
+                        <p class="mb-0">{{session('success')}}</p>
+                    </div>
+                    @endif
+                    <form action="{{$edit ? route('updateQuestionSets',$questions_set->id) : route('questions-sets.store')}}" method="POST">
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" class="form-control" name="title" id="title" placeholder="" value="{{old('title')}}">
+                            <input type="text" class="form-control" name="title" id="title" placeholder="" value="{{$edit ? $questions_set->title : old('title')}}">
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <input type="text" class="form-control" name="description" id="description" placeholder="" value="{{old('description')}}">
+                            <input type="text" class="form-control" name="description" id="description" placeholder="" value="{{$edit ? $questions_set->description :old('description')}}">
                         </div>
                         <div class="form-group">
                             <label for="schedule_date">Schedule Ddate</label>
-                            <input type="date" class="form-control" name="schedule_date" id="schedule_date" placeholder="" value="{{old('schedule_date')}}">
+                            <input type="date" class="form-control" name="schedule_date" id="schedule_date" placeholder="" value="{{$edit ? $questions_set->schedule_date :old('schedule_date')}}">
                         </div>
                         <button type="submit" class="btn btn-success">Submit</button>
                     </form>

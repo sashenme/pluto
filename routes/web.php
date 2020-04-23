@@ -47,4 +47,5 @@ Route::group(['middleware' => ['auth','role:admin']], function () {
     })->name('admin'); 
     Route::post('/user/{id}/updateUser', 'UserController@update')->name('updateUser');
     Route::resource('questions-sets', 'QuestionsSetController');
+    Route::post('/questions-sets/{id}/update-questions-sets','QuestionsSetController@update')->name('updateQuestionSets');
 });
