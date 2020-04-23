@@ -17,9 +17,9 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $Question = Question::orderBy('id','DESC')->paginate(5);
+        $Question = Question::orderBy('id', 'DESC')->paginate(5);
 
-            return QuestionResource::collection($Question);
+        return QuestionResource::collection($Question);
     }
 
     /**
@@ -29,7 +29,9 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        $edit = false;
+        $questions_sets = QuestionsSet::all();
+        return view('admin.questionsCreate',compact('edit','questions_sets'));
     }
 
     /**
@@ -40,16 +42,25 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'questions_set_id' => 'required',
+            'title' => 'required',
+            'name.*' => 'required',
+            'reason.*' => 'required',
+            'correct.*' => 'required|boolean',
+        ]);
+
         $question = $request->isMethod('put') ? Question::findOrFail($request->question_id) : new Question;
-        
+
         $question->id = $request->input('question_id');
         $question->questions_set_id = $request->input('questions_set_id');
         $question->user_id = $request->input('user_id');
         $question->title = $request->input('title');
-        
-        if($question->save()){
-            return new QuestionResource($question);
-        }
+
+        return redirect()->back();
+        // if ($question->save()) {
+        //     return new QuestionResource($question);
+        // }
     }
 
     /**
@@ -96,8 +107,8 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $question = Question::findOrFail($id);
-       
-        if($question->delete()){
+
+        if ($question->delete()) {
             return new QuestionResource($question);
         }
     }
