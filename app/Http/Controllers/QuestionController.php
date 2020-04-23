@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
 use Illuminate\Http\Request;
 use App\Question;
 use App\QuestionsSet;
@@ -53,10 +54,23 @@ class QuestionController extends Controller
 
         $question->id = $request->input('question_id');
         $question->questions_set_id = $request->input('questions_set_id');
-        $question->user_id = $request->input('user_id');
         $question->title = $request->input('title');
 
-        return redirect()->back();
+
+        $question->save();
+
+        foreach ($request->name  as $key => $val) { 
+            $answer = new Answer;
+            $answer->question_id = $question->id;
+            $answer->name = $request->input('name')[$key];
+            $answer->correct = $request->input('correct')[$key] == '1' ? 1 : 0;
+            
+            $answer->save();
+        }
+
+
+
+        return redirect()->back()->with('success','Question and Answers added successfully');
         // if ($question->save()) {
         //     return new QuestionResource($question);
         // }
