@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-6">
         <div class="card success">
             <div class="card-header">
                 <h3 class="card-title">Questions and Answers</h3>
