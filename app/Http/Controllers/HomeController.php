@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
+use App\Libraries\Common;
 use App\Question;
 use App\QuestionsSet;
 use App\Response;
@@ -30,11 +31,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
+
         $admin = User::findOrFail(Auth::id())->hasRole('admin');
 
-       if($admin)
-        return redirect()->route('admin');
+        if ($admin)
+            return redirect()->route('admin');
 
         $questions_set = QuestionsSet::where('schedule_date', Carbon::today())->get();
         $dailyQuiz = true;
@@ -59,8 +60,8 @@ class HomeController extends Controller
                 $dailyQuiz = false;
         }
 
- 
-        $correctAnswers =  Response::where('user_id', Auth::id())->where('correct', 1)->whereDate('updated_at',Carbon::today())->count();
+
+        $correctAnswers =  Response::where('user_id', Auth::id())->where('correct', 1)->whereDate('updated_at', Carbon::today())->count();
         return view('user.home')->with(['questions_set' => $questions_set, 'dailyQuiz' => $dailyQuiz, 'correctAnswers' => $correctAnswers]);
     }
 
@@ -76,7 +77,7 @@ class HomeController extends Controller
             // return 'no questions for today'; //return redirect()->view()'';
             return view('user.empty')->with('message', 'No Questions for today!');
 
-        $questions = Question::where('questions_set_id', $questions_set_id)->first();
+        
 
         //Show question given from param
         if (!empty($forced_question_id)) {
@@ -96,35 +97,27 @@ class HomeController extends Controller
 
             if (!empty($lastResponse)) {
                 $lastResponseQuestion_id = $lastResponse->question_id;
-                $questions_set_idx = Question::find($lastResponseQuestion_id)->questions_set_id;
-                $questions_ = Question::where('questions_set_id', $questions_set_idx)->get();
 
-                foreach ($questions_ as $question) {
-                    if ($question->id <= $lastResponseQuestion_id)
-                        continue;
-
-                    //next question id
-                    $question_id = $question->id;
-                    $questions = Question::find($question_id);
-                }
+                $question_id = Common::getNextQuestion($lastResponseQuestion_id);
 
                 if (empty($question_id)) {
-                    $status =    $request->session()->get('status');
-                    
-                    $message =    $request->session()->get('message');
+                    $status = $request->session()->get('status');
 
-                    
+                    $message = $request->session()->get('message');
+
+
                     return redirect()->route('home')->with(['status' =>  $status, 'message' => $message]); //when he answer all
                 }
             } else {
 
                 //Show first question
 
-                $question_id  = $questions->id;
+                $question_id = Question::where('questions_set_id', $questions_set_id)->first()->id;
             }
         }
 
-       
+        $questions = Question::find($question_id);
+        
         return view('user.dailyQuiz')->with(['questions_set' => $questions_set, 'questions' => $questions]);
     }
 }
