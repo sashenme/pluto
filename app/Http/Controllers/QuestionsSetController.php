@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\QuestionsSet;
 use App\Http\Resources\QuestionsSet as QuestionsSetResource;
+use App\Question;
 
 class QuestionsSetController extends Controller
 {
@@ -15,7 +16,7 @@ class QuestionsSetController extends Controller
      */
     public function index(Request $request)
     {
-        $questions_sets = QuestionsSet::orderBy('id', 'DESC')->paginate(5);
+        $questions_sets = QuestionsSet::orderBy('id', 'DESC')->paginate(5); 
         $edit = false;
         return view('admin.addQuizSet', compact('questions_sets', 'edit'))
             ->with('i', ($request->input('page', 1) - 1) * 5)
@@ -120,7 +121,8 @@ class QuestionsSetController extends Controller
         $questions_set = QuestionsSet::findOrFail($id);
 
         if ($questions_set->delete()) {
-            return new QuestionsSetResource($questions_set);
+            // return new QuestionsSetResource($questions_set);
+            return redirect()->back()->with('success','Questions set deleted successfully!');
         }
     }
 }

@@ -68,7 +68,7 @@
                     <th>Title</th>
                     <th width="40%">Description</th>
                     <th>Schedule Date</th>
-                    <th>Quetions</th>
+                    <th>Questions</th>
                     <th>Action</th>
 
                     @foreach ($questions_sets as $key => $qSet)
@@ -77,7 +77,10 @@
                         <td>{{ $qSet->title }}</td>
                         <td>{{ $qSet->description }}</td>
                         <td>{{ $qSet->schedule_date }}</td>
-                        <td>2 Questions <br> <a href="#" class="badge badge-success">Add more</a></td>
+                        <td>
+                            @if(App\Question::where('questions_set_id',$qSet->id)->count() >0)
+                            {{App\Question::where('questions_set_id',$qSet->id)->count()}} Questions<br>
+                            @endif  <a href="#" class="badge badge-success">Add New</a></td>
                         <td>
 
                             <a class="btn btn-primary btn-sm" href="{{ route('questions-sets.edit',$qSet->id) }}">Edit</a>
