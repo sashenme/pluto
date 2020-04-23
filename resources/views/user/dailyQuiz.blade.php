@@ -28,7 +28,7 @@
                     <?php $answers = App\Answer::where('question_id', $questions->id)->get() ?>
                     @foreach($answers as $answer)
                     <div class="custom-control custom-checkbox">
-                        <input class="custom-control-input" type="radio" id="answer-{{$answer->id}}" checked="false" name="answer_id" value="{{$answer->id}}">
+                        <input class="custom-control-input" type="radio" id="answer-{{$answer->id}}" name="answer_id" value="{{$answer->id}}">
                         <label for="answer-{{$answer->id}}" class="custom-control-label">{{$answer->name}}</label>
                     </div>
                     @endforeach
