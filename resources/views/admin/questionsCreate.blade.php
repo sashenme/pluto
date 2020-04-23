@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="correct-1">Answer 1 - Correct</label>
+                                        <label for="correct-1">&nbsp;</label>
                                         <select name="correct[]" id="" class="form-control">
                                             <option value="0">Incorrect</option>
                                             <option value="1">Correct</option>
@@ -83,11 +83,13 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="correct-1">Answer 2 - Correct</label>
-                                        <select name="correct[]" id="" class="form-control">
+                                        <label for="correct-1">&nbsp;</label>
+
+                                        <select name="correct[]" class="custom-select" id="inputGroupSelect04">
                                             <option value="0">Incorrect</option>
                                             <option value="1">Correct</option>
                                         </select>
+
                                     </div>
                                 </div>
                             </div>
@@ -124,17 +126,20 @@
             ' </div>' +
             '<div class="col-md-7">' +
             '<div class="form-group">' +
-            '<label for="reason[]">Answer ' + answerInc + ' - Reason</label>' +
+            '<label for="reason[]">Reason ' + answerInc + '</label>' +
             '<input type="text" class="form-control" name="reason[]" id="reason[]" placeholder="" value="">' +
             '</div>' +
             '</div>' +
-            '<div class="col-md-2">' +
-            '<div class="form-group">' +
-            '<label for="correct-' + answerInc + '">Answer ' + answerInc + ' - Correct</label>' +
-            '<select name="correct[]" id="" class="form-control">' +
+            '<div class="col-md-2"><div class="form-group"><label for="correct-1">&nbsp;</label>' +
+            ' <div class="input-group">' +
+            '<select name="correct[]" class="custom-select" id="inputGroupSelect04">' +
             '<option value="0">Incorrect</option>' +
             '<option value="1">Correct</option>' +
             '</select>' +
+            '<div class="input-group-append">' +
+            '<button class="btn btn-outline-danger remove" type="button">x</button>' +
+            '</div>' +
+            '</div>' +
             '</div>' +
             '</div>' +
             '</div>';
@@ -151,7 +156,7 @@
             alert('You cannot delete all rows');
         } else {
             console.log(l);
-            $(this).parent().parent().remove();
+            $(this).parent().parent().parent().parent().parent().remove();
         }
 
 
