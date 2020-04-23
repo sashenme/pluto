@@ -15,9 +15,9 @@ class QuestionsSetController extends Controller
      */
     public function index(Request $request)
     {
-        $questionsSet = QuestionsSet::orderBy('id','DESC')->paginate(5);
+        $questions_sets = QuestionsSet::orderBy('id','DESC')->paginate(5);
 
-        return view('admin.addQuizSet',compact('questionssets'))
+        return view('admin.addQuizSet',compact('questions_sets'))
         ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -39,6 +39,13 @@ class QuestionsSetController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+            'schedule_date' => 'required|date',
+        ]);
+
+
         $questions_set = $request->isMethod('put') ? QuestionsSet::findOrFail($request->questions_set_id) : new QuestionsSet;
 
         $questions_set->id = $request->input('questions_set_id');
@@ -47,7 +54,8 @@ class QuestionsSetController extends Controller
         $questions_set->schedule_date = $request->input('schedule_date');
 
         if($questions_set->save()){
-            return new QuestionsSetResource($questions_set);
+            // return new QuestionsSetResource($questions_set);
+            return redirect()->back();
         }
     }
 
