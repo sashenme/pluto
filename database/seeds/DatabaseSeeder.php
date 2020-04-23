@@ -14,8 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
-
+        
         Role::create(['name' => 'user']);
         Role::create(['name' => 'admin']);
 
@@ -39,5 +38,9 @@ class DatabaseSeeder extends Seeder
         $user->assignRole('admin');
         $user = User::find(2);
         $user->assignRole('user');
+
+
+        $this->call(DummyQuestionsSeeder::class);
+
     }
 }
