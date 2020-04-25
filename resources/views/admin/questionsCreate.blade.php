@@ -30,7 +30,7 @@
                     @endif
 
                     @if($questions_sets->count() > 0)
-                    <form action="{{route('questions.store')}}" method="POST">
+                    <form action="{{$edit ? route('updateQuestions', $selectedQuestion->id) : route('questions.store')}}" method="POST">
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="">Questions Set</label>
@@ -43,21 +43,49 @@
                         </div>
                         <div class="form-group">
                             <label for="question">Question</label>
-                            <input type="text" class="form-control" name="title" id="question" placeholder="" value="{{$edit ? $questions_set->question : old('question')}}">
+                            <input type="text" class="form-control" name="title" id="question" placeholder="" value="{{$edit ? $selectedQuestion->title : old('title')}}">
                         </div>
                         <h3>Answers</h3>
                         <div class="answers">
+                            @if($edit)
+                            @foreach(App\Answer::where('question_id',$selectedQuestion->id)->get() as $answer)
                             <div class="row">
                                 <div class="col-md-3">
+                                    <input type="hidden" name="id[]" value="{{$answer->id}}">
                                     <div class="form-group">
                                         <label for="answer[]">Answer 1</label>
-                                        <input type="text" class="form-control" name="name[]" id="answer[]" placeholder="" value="{{$edit ? $questions_set->question : old('answer[]')}}">
+                                        <input type="text" class="form-control" name="name[]" id="answer[]" placeholder="" value="{{$answer->name}}">
                                     </div>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <label for="reason[]">Answer 1 - Reason</label>
-                                        <input type="text" class="form-control" name="reason[]" id="reason[]" placeholder="" value="{{$edit ? $questions_set->question : old('answer[]')}}">
+                                        <input type="text" class="form-control" name="reason[]" id="reason[]" placeholder="" value="{{$answer->reason}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="correct-1">&nbsp;</label>
+                                        <select name="correct[]" id="" class="form-control">
+                                            <option value="0">Incorrect</option>
+                                            <option value="1" {{$answer->correct == 1 ? 'selected' : ''}}>Correct</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                            @else
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="answer[]">Answer 1</label>
+                                        <input type="text" class="form-control" name="name[]" id="answer[]" placeholder="" value="{{  old('answer[]')}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label for="reason[]">Answer 1 - Reason</label>
+                                        <input type="text" class="form-control" name="reason[]" id="reason[]" placeholder="" value="{{ old('answer[]')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -74,13 +102,13 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="answer[]">Answer 2</label>
-                                        <input type="text" class="form-control" name="name[]" id="answer[]" placeholder="" value="{{$edit ? $questions_set->question : old('answer[]')}}">
+                                        <input type="text" class="form-control" name="name[]" id="answer[]" placeholder="" value="{{ old('answer[]')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <label for="reason[]">Answer 2 - Reason</label>
-                                        <input type="text" class="form-control" name="reason[]" id="reason[]" placeholder="" value="{{$edit ? $questions_set->question : old('answer[]')}}">
+                                        <input type="text" class="form-control" name="reason[]" id="reason[]" placeholder="" value="{{ old('answer[]')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -95,6 +123,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
                         <a href="#" id="addRow" class="btn btn-default float-right">Add New Answer</a>
                         <button type="submit" class="btn btn-success">Submit</button>
