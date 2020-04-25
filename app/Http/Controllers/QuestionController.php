@@ -115,6 +115,13 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'questions_set_id' => 'required',
+            'title' => 'required',
+            'name.*' => 'required',
+            'reason.*' => 'required',
+        ]);
+        
         $questions = Question::find($id);
         $questions->title = $request->input('title');
 

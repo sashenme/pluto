@@ -94,10 +94,11 @@ class AnswerController extends Controller
      */
     public function destroy($id)
     {
-        $question = Answer::findOrFail($id);
-       
-        if($question->delete()){
-            return new AnswerResource($question);
+        $answer = Answer::findOrFail($id);
+        $quesitonId = $answer->pluck('question_id')->first();
+         
+        if($answer->delete()){
+            return redirect()->route('questions.edit',$quesitonId)->with('success','Answer deleted successfully!');
         }
     }
 }

@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label for="">Questions Set</label>
                             <select class="form-control" name="questions_set_id">
-                                
+
                                 @foreach($questions_sets as $qSet)
                                 <option value="{{$qSet->id}}">{{$qSet->title}}</option>
                                 @endforeach
@@ -66,11 +66,20 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="correct-1">&nbsp;</label>
-                                        <select name="correct[]" id="" class="form-control">
-                                            <option value="0">❌</option>
-                                            <option value="1" {{$answer->correct == 1 ? 'selected' : ''}}>✔️</option>
-                                        </select>
+                                        <div class="input-group">
+                                            <select name="correct[]" id="" class="custom-select">
+                                                <option value="0">❌</option>
+                                                <option value="1" {{$answer->correct == 1 ? 'selected' : ''}}>✔️</option>
+                                            </select>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-danger answer-delete" data-form-action="{{action('AnswerController@destroy',$answer->id)}}" type="button">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                             @endforeach
@@ -115,7 +124,7 @@
                                     <div class="form-group">
                                         <label for="correct-1">&nbsp;</label>
 
-                                        <select name="correct[]" class="custom-select" id="inputGroupSelect04">
+                                        <select name="correct[]" class="custom-select">
                                             <option value="0">❌</option>
                                             <option value="1">✔️</option>
                                         </select>
@@ -183,6 +192,11 @@
         </div>
     </div>
 </div>
+
+<form class="delete-form" method="POST"> 
+    {{csrf_field()}}
+<input name="_method" type="hidden" value="DELETE">
+</form>
 @endsection
 @section('scripts')
 <script>
@@ -258,5 +272,14 @@
         }
         console.log(i);
     }
+
+    $('.answer-delete').click(function() {
+        var r = confirm("Are you sure want to delete this answer?");
+        if (r == true) {
+            formAction = $(this).attr('data-form-action'); 
+            $(".delete-form").attr('action', formAction);
+            $(".delete-form").submit();
+        }  
+    });
 </script>
 @endsection
