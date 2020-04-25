@@ -39,7 +39,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('questions.create')}}" class="nav-link">
+            <a href="{{route('questions.index')}}" class="nav-link">
               <i class="nav-icon fas fa-question"></i>
               <p>
                 Questions/Answers
