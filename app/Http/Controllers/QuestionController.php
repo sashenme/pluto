@@ -121,7 +121,7 @@ class QuestionController extends Controller
             'name.*' => 'required',
             'reason.*' => 'required',
         ]);
-        
+
         $questions = Question::find($id);
         $questions->title = $request->input('title');
 
@@ -146,9 +146,9 @@ class QuestionController extends Controller
             foreach ($newAnswers  as $key => $val) {
                 $answer = new Answer;
                 $answer->question_id = $id;
-                $answer->name = $request->input('name')[$key+$currentAnswersCount];
-                $answer->reason = $request->input('reason')[$key+$currentAnswersCount];
-                $answer->correct = $request->input('correct')[$key+$currentAnswersCount] == '1' ? 1 : 0;
+                $answer->name = $request->input('name')[$key + $currentAnswersCount];
+                $answer->reason = $request->input('reason')[$key + $currentAnswersCount];
+                $answer->correct = $request->input('correct')[$key + $currentAnswersCount] == '1' ? 1 : 0;
 
                 $answer->save();
             }
@@ -169,7 +169,7 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
 
         if ($question->delete()) {
-            return redirect()->route('questions.index') - with('success', 'Question and Answers are deleted successufully!');
+            return redirect()->route('questions.index')->with('success', 'Question and Answers are deleted successufully!');
             // return new QuestionResource($question);
         }
     }
