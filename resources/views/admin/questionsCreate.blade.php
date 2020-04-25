@@ -28,12 +28,14 @@
                         <p class="mb-0">{{session('success')}}</p>
                     </div>
                     @endif
+
+                    @if($questions_sets->count() > 0)
                     <form action="{{route('questions.store')}}" method="POST">
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="">Questions Set</label>
                             <select class="form-control" name="questions_set_id">
-                                <option>Select a Question Set</option>
+                                
                                 @foreach($questions_sets as $qSet)
                                 <option value="{{$qSet->id}}">{{$qSet->title}}</option>
                                 @endforeach
@@ -97,8 +99,58 @@
                         <a href="#" id="addRow" class="btn btn-default float-right">Add New Answer</a>
                         <button type="submit" class="btn btn-success">Submit</button>
                     </form>
+                    @else
+                    <h3>No questions set found.</h3>
+                    <p> Please add a <a href="{{route('questions-sets.index')}}" class="">Questions Set</a> to add Questions and Answers</p>
+                    @endif
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Questions and Answers</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body" style="display: block;">
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Question</th>
+                        <th>Action</th>
+                    </tr>
+                    @foreach($questions as $question)
+                    <tr>
+                        <td> {{$question->id}}</td>
+                        <td>
+                            <h5> {{$question->title}}</h5>
+                            <ol class="small">
+                                @foreach(App\Answer::where('question_id',$question->id)->get() as $answer)
+                                <li class="{{$answer->correct == 1 ? 'text-success' :''}}">{{$answer->name.' - '.$answer->reason}}</li>
+                                @endforeach
+                            </ol>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="{{ route('questions.edit',$question->id) }}">Edit</a>
+                            {!! Form::open(['method' => 'DELETE','route' => ['questions.destroy', $question->id],'style'=>'display:inline']) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::close() !!}
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+
+
+
+            </div>
+            <!-- /.card-body -->
         </div>
     </div>
 </div>

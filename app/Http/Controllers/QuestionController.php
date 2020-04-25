@@ -32,7 +32,8 @@ class QuestionController extends Controller
     {
         $edit = false;
         $questions_sets = QuestionsSet::all();
-        return view('admin.questionsCreate',compact('edit','questions_sets'));
+        $questions = Question::all();
+        return view('admin.questionsCreate',compact('edit','questions_sets','questions'));
     }
 
     /**
@@ -123,7 +124,8 @@ class QuestionController extends Controller
         $question = Question::findOrFail($id);
 
         if ($question->delete()) {
-            return new QuestionResource($question);
+            return redirect()->back()-with('success','Question and Answers are deleted successufully!');
+            // return new QuestionResource($question);
         }
     }
 }
