@@ -48,18 +48,19 @@
                         <h3>Answers</h3>
                         <div class="answers">
                             @if($edit)
+                            <?php $i = 1;?>
                             @foreach(App\Answer::where('question_id',$selectedQuestion->id)->get() as $answer)
                             <div class="row">
                                 <div class="col-md-3">
                                     <input type="hidden" name="id[]" value="{{$answer->id}}">
                                     <div class="form-group">
-                                        <label for="answer[]">Answer 1</label>
+                                        <label for="answer[]">Answer {{$i}}</label>
                                         <input type="text" class="form-control" name="name[]" id="answer[]" placeholder="" value="{{$answer->name}}">
                                     </div>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="form-group">
-                                        <label for="reason[]">Answer 1 - Reason</label>
+                                        <label for="reason[]">Answer {{$i}} - Reason</label>
                                         <input type="text" class="form-control" name="reason[]" id="reason[]" placeholder="" value="{{$answer->reason}}">
                                     </div>
                                 </div>
@@ -82,6 +83,7 @@
 
                                 </div>
                             </div>
+                            <?php $i++;?>
                             @endforeach
                             @else
                             <div class="row">
@@ -100,10 +102,17 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="correct-1">&nbsp;</label>
-                                        <select name="correct[]" id="" class="form-control">
-                                            <option value="0">❌</option>
-                                            <option value="1">✔️</option>
-                                        </select>
+                                        <div class="input-group">
+                                            <select name="correct[]" id="" class="form-control">
+                                                <option value="0">❌</option>
+                                                <option value="1">✔️</option>
+                                            </select>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary " type="button" disabled>
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -123,12 +132,17 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="correct-1">&nbsp;</label>
-
-                                        <select name="correct[]" class="custom-select">
-                                            <option value="0">❌</option>
-                                            <option value="1">✔️</option>
-                                        </select>
-
+                                        <div class="input-group">
+                                            <select name="correct[]" id="" class="custom-select">
+                                                <option value="0">❌</option>
+                                                <option value="1">✔️</option>
+                                            </select>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary " type="button" disabled>
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -193,9 +207,9 @@
     </div>
 </div>
 
-<form class="delete-form" method="POST"> 
+<form class="delete-form" method="POST">
     {{csrf_field()}}
-<input name="_method" type="hidden" value="DELETE">
+    <input name="_method" type="hidden" value="DELETE">
 </form>
 @endsection
 @section('scripts')
@@ -206,7 +220,7 @@
     // var i = 21;
 
 
-    var answerInc = 3;
+    var answerInc = <?php echo $edit ? $i :'3'?>;
 
     function addRow() {
         console.log("added a row");
@@ -276,10 +290,10 @@
     $('.answer-delete').click(function() {
         var r = confirm("Are you sure want to delete this answer?");
         if (r == true) {
-            formAction = $(this).attr('data-form-action'); 
+            formAction = $(this).attr('data-form-action');
             $(".delete-form").attr('action', formAction);
             $(".delete-form").submit();
-        }  
+        }
     });
 </script>
 @endsection
