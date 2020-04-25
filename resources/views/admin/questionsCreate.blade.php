@@ -67,8 +67,8 @@
                                     <div class="form-group">
                                         <label for="correct-1">&nbsp;</label>
                                         <select name="correct[]" id="" class="form-control">
-                                            <option value="0">Incorrect</option>
-                                            <option value="1" {{$answer->correct == 1 ? 'selected' : ''}}>Correct</option>
+                                            <option value="0">❌</option>
+                                            <option value="1" {{$answer->correct == 1 ? 'selected' : ''}}>✔️</option>
                                         </select>
                                     </div>
                                 </div>
@@ -92,8 +92,8 @@
                                     <div class="form-group">
                                         <label for="correct-1">&nbsp;</label>
                                         <select name="correct[]" id="" class="form-control">
-                                            <option value="0">Incorrect</option>
-                                            <option value="1">Correct</option>
+                                            <option value="0">❌</option>
+                                            <option value="1">✔️</option>
                                         </select>
                                     </div>
                                 </div>
@@ -116,8 +116,8 @@
                                         <label for="correct-1">&nbsp;</label>
 
                                         <select name="correct[]" class="custom-select" id="inputGroupSelect04">
-                                            <option value="0">Incorrect</option>
-                                            <option value="1">Correct</option>
+                                            <option value="0">❌</option>
+                                            <option value="1">✔️</option>
                                         </select>
 
                                     </div>
@@ -214,11 +214,11 @@
             '<div class="col-md-2"><div class="form-group"><label for="correct-1">&nbsp;</label>' +
             ' <div class="input-group">' +
             '<select name="correct[]" class="custom-select" id="inputGroupSelect04">' +
-            '<option value="0">Incorrect</option>' +
-            '<option value="1">Correct</option>' +
+            '<option value="0">❌</option>' +
+            '<option value="1">✔️</option>' +
             '</select>' +
             '<div class="input-group-append">' +
-            '<button class="btn btn-outline-danger remove" type="button">x</button>' +
+            '<button class="btn btn-outline-danger remove" type="button"><i class="fas fa-trash-alt"></i></button>' +
             '</div>' +
             '</div>' +
             '</div>' +
