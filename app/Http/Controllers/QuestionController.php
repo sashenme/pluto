@@ -63,6 +63,7 @@ class QuestionController extends Controller
             $answer = new Answer;
             $answer->question_id = $question->id;
             $answer->name = $request->input('name')[$key];
+            $answer->reason = $request->input('reason')[$key];
             $answer->correct = $request->input('correct')[$key] == '1' ? 1 : 0;
             
             $answer->save();
