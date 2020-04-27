@@ -41,14 +41,19 @@ Route::group(['middleware' => ['role:user|admin']], function () {
     Route::get('/daily-quiz/{id?}', 'HomeController@dailyQuiz')->name('dailyQuiz');
 });
 
-Route::group(['middleware' => ['auth','role:admin']], function () {
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin', function () {
         return view('admin.home');
-    })->name('admin'); 
+    })->name('admin');
     Route::post('/user/{id}/updateUser', 'UserController@update')->name('updateUser');
     Route::resource('questions-sets', 'QuestionsSetController');
-    Route::post('/questions-sets/{id}/update-questions-sets','QuestionsSetController@update')->name('updateQuestionSets');
-    Route::resource('questions','QuestionController');
+    Route::post('/questions-sets/{id}/update-questions-sets', 'QuestionsSetController@update')->name('updateQuestionSets');
+    Route::resource('questions', 'QuestionController');
     Route::post('/questions/{id}/updateQuestions', 'QuestionController@update')->name('updateQuestions');
-    Route::resource('answers','AnswerController');
+    Route::resource('answers', 'AnswerController');
+});
+
+
+Route::get('/logged', function () {
+    return view('layouts.user');
 });
