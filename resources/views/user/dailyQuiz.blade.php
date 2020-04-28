@@ -5,9 +5,9 @@
     <div class="container-fluid main-container d-flex justify-content-between">
         <div>
             <h3 class="mb-0">Daily Quiz</h3>
-            <h1 class="mb-0">Hand Washing</h1>
+            <h1 class="mb-0"> @foreach($questions_set as $qset){{$qset->title}}@endforeach</h1>
         </div>
-        <h1 class="mt-3">01</h1>
+        <h1 class="mt-3">{{$questions->id}}</h1>
     </div>
 </div>
 <div class="container-fluid main-container">

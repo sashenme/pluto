@@ -77,7 +77,7 @@ class HomeController extends Controller
             // return 'no questions for today'; //return redirect()->view()'';
             return view('user.empty')->with('message', 'No Questions for today!');
 
-        
+
 
         //Show question given from param
         if (!empty($forced_question_id)) {
@@ -117,7 +117,8 @@ class HomeController extends Controller
         }
 
         $questions = Question::find($question_id);
-        
+        // return $questions_set;
+        // exit;
         return view('user.dailyQuiz')->with(['questions_set' => $questions_set, 'questions' => $questions]);
     }
 }
