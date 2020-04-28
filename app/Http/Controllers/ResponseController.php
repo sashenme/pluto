@@ -41,30 +41,32 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        // $response = $request->isMethod('put') ? Response::findOrFail($request->response_id) : new Response;
-        // $response->id = $request->input('response_id');
+
+        $this->validate($request, [
+            'question_id' => 'required',
+            'answer_id' => 'required'
+        ]);
+
         $next = $request->input('next');
         $answer = $request->input('answer_id');
         $question_id = $request->input('question_id');
 
         $isCorrect = Answer::where('id', $answer)->pluck('correct')->first();
 
-        $correctAnswer = Answer::where('question_id',$question_id)->where('correct',1)->pluck('name');
+        $correctAnswer = Answer::where('question_id', $question_id)->where('correct', 1)->pluck('name');
 
         $response =   new Response;
         $response->user_id = Auth::id();
         $response->question_id = $request->input('question_id');
         $response->answer_id = $request->input('answer_id');
 
-    $response->correct = $isCorrect == '1' ? 1 : 0;
+        $response->correct = $isCorrect == '1' ? 1 : 0;
 
         if ($response->save()) {
-            if ($isCorrect == '1') { 
-                return redirect()->route('dailyQuiz')->with(['status'=>'success','message'=>'Your answer is correct']);
-    
-            }else{ 
-                return redirect()->route('dailyQuiz')->with(['status'=>'danger','message'=>'Your answer is wrong, correct answer is '.$correctAnswer[0]]);
-    
+            if ($isCorrect == '1') {
+                return redirect()->route('dailyQuiz')->with(['status' => 'success', 'message' => 'Your answer is correct']);
+            } else {
+                return redirect()->route('dailyQuiz')->with(['status' => 'danger', 'message' => 'Your answer is wrong, correct answer is ' . $correctAnswer[0]]);
             }
         }
     }
