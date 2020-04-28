@@ -1,9 +1,150 @@
 body {
   font-family: "Poppins";
+  background: #eeeeee;
 }
 
 .main-container {
-  max-width: 1200px;
+  max-width: 1080px;
   margin: 0 auto;
+}
+
+nav {
+  background-color: #fff;
+}
+
+.bg-wrap {
+  background: #04487f;
+  border-bottom: 30px solid #f57e3f;
+  width: 100%;
+  height: 45vh;
+  position: absolute;
+  left: 0;
+  border-bottom-left-radius: 60%;
+  border-bottom-right-radius: 60%;
+  z-index: -1;
+}
+
+.text-normal {
+  font-weight: 400;
+}
+
+.text-medium {
+  font-weight: 500;
+}
+
+.text-primary {
+  color: #04487f !important;
+}
+
+h3 {
+  font-size: 1.65rem;
+  color: #1d293a;
+  font-weight: 600;
+}
+
+h6 {
+  color: #1d293a;
+  font-weight: 600;
+}
+
+.box {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 20px;
+}
+
+.box p {
+  line-height: 1.8;
+  text-align: justify;
+}
+
+p {
+  color: #3d3d3d;
+}
+
+.header-line,
+.header-line::after {
+  height: 5px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.header-line {
+  width: 32px;
+  background: #04487f;
+  margin-bottom: 25px;
+}
+
+.header-line::after {
+  content: "";
+  width: 15px;
+  background: #f57e3f;
+  position: absolute;
+  margin-left: 36px;
+}
+
+video {
+  border-radius: 15px;
+}
+
+.px-30 {
+  padding: 0 30px;
+}
+
+.pl-30 {
+  padding-left: 30px;
+}
+
+.btn-primary {
+  background-color: #04487f;
+  border-color: #04487f;
+}
+
+.btn {
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.text-secondary {
+  color: #f57e3f !important;
+}
+
+ol {
+  list-style: none;
+  counter-reset: pluto-counter;
+  padding-left: 0;
+  padding-top: 17px;
+  margin-bottom: 0;
+}
+
+ol li {
+  counter-increment: pluto-counter;
+  margin-bottom: 20px;
+}
+
+ol li:last-child {
+  margin-bottom: 0;
+}
+
+ol li::before {
+  content: counter(pluto-counter) "";
+  color: #fff;
+  background: #f57e3f;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  margin-right: 25px;
+}
+
+footer {
+  background: #1d2123;
+  color: #fff;
+  padding: 10px 0;
 }
 /*# sourceMappingURL=main.css.map */
