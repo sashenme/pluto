@@ -1,8 +1,13 @@
 $primary: #04487f;
 $secondary: #f57e3f;
+$dark: #1d293a;
+
 body {
     font-family: "Poppins";
     background: #eeeeee;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 5rem;
 }
 .main-container {
     max-width: 1080px;
@@ -22,6 +27,19 @@ nav {
     border-bottom-right-radius: 60%;
     z-index: -1;
 }
+.bg-wrap-top {
+    background: $primary;
+    color: #fff;
+    border-bottom: 4px solid $secondary;
+    padding: 30px 15px;
+    h3 {
+        color: #fff;
+        font-weight: 500;
+    }
+    h1 {
+        font-weight: 600;
+    }
+}
 .text-normal {
     font-weight: 400;
 }
@@ -31,13 +49,17 @@ nav {
 .text-primary {
     color: $primary !important;
 }
+h2 {
+    color: $dark;
+    font-weight: 700;
+}
 h3 {
     font-size: 1.65rem;
-    color: #1d293a;
+    color: $dark;
     font-weight: 600;
 }
 h6 {
-    color: #1d293a;
+    color: $dark;
     font-weight: 600;
 }
 .box {
@@ -86,8 +108,7 @@ video {
 .btn {
     text-transform: uppercase;
     font-weight: 600;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 30px;
 }
 .text-secondary {
     color: $secondary !important;
@@ -120,10 +141,41 @@ ol li::before {
     text-align: center;
     margin-right: 25px;
 }
+
+.answers {
+    .answer {
+        font-size: 1.4rem;
+        display: inline-block;
+        background: #fff;
+        border: 2px solid #ccc;
+        padding: 10px 30px;
+        border-radius: 7px;
+        margin: 10px;
+        cursor: pointer;
+        transition: all ease-in-out 400ms;
+    }
+    .answer:hover {
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    }
+    .answer.active {
+        border-color: $primary;
+    }
+    input[type="radio"] {
+        opacity: 0;
+    }
+    input[type="radio"]:checked + label {
+        border-color: $primary;
+    }
+}
+
 footer {
     background: #1d2123;
     color: #fff;
-    padding: 10px 0;
+    padding: 10px 15px;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+
     a {
         color: $secondary !important;
     }

@@ -1,6 +1,9 @@
 body {
   font-family: "Poppins";
   background: #eeeeee;
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 5rem;
 }
 
 .main-container {
@@ -24,6 +27,22 @@ nav {
   z-index: -1;
 }
 
+.bg-wrap-top {
+  background: #04487f;
+  color: #fff;
+  border-bottom: 4px solid #f57e3f;
+  padding: 30px 15px;
+}
+
+.bg-wrap-top h3 {
+  color: #fff;
+  font-weight: 500;
+}
+
+.bg-wrap-top h1 {
+  font-weight: 600;
+}
+
 .text-normal {
   font-weight: 400;
 }
@@ -34,6 +53,11 @@ nav {
 
 .text-primary {
   color: #04487f !important;
+}
+
+h2 {
+  color: #1d293a;
+  font-weight: 700;
 }
 
 h3 {
@@ -103,8 +127,7 @@ video {
 .btn {
   text-transform: uppercase;
   font-weight: 600;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 30px;
 }
 
 .text-secondary {
@@ -142,10 +165,43 @@ ol li::before {
   margin-right: 25px;
 }
 
+.answers .answer {
+  font-size: 1.4rem;
+  display: inline-block;
+  background: #fff;
+  border: 2px solid #ccc;
+  padding: 10px 30px;
+  border-radius: 7px;
+  margin: 10px;
+  cursor: pointer;
+  -webkit-transition: all ease-in-out 400ms;
+  transition: all ease-in-out 400ms;
+}
+
+.answers .answer:hover {
+  -webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.answers .answer.active {
+  border-color: #04487f;
+}
+
+.answers input[type="radio"] {
+  opacity: 0;
+}
+
+.answers input[type="radio"]:checked + label {
+  border-color: #04487f;
+}
+
 footer {
   background: #1d2123;
   color: #fff;
-  padding: 10px 0;
+  padding: 10px 15px;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
 }
 
 footer a {
