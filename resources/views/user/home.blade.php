@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.user')
 
 @section('content')
 <div class="row clearfix">
@@ -56,8 +56,8 @@
                 </div>
                 @endif
                 <p>Good Job! You have answered all questions for today!
-                    
-                {{$correctAnswers}}/2
+
+                    {{$correctAnswers}}/2
                 </p>
                 @endif
                 @else

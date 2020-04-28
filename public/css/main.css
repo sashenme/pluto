@@ -147,4 +147,8 @@ footer {
   color: #fff;
   padding: 10px 0;
 }
+
+footer a {
+  color: #f57e3f !important;
+}
 /*# sourceMappingURL=main.css.map */

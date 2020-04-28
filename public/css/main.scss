@@ -124,4 +124,7 @@ footer {
     background: #1d2123;
     color: #fff;
     padding: 10px 0;
+    a {
+        color: $secondary !important;
+    }
 }
