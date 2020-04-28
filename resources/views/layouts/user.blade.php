@@ -23,11 +23,18 @@
                 <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Sashen
+                            {{{ Auth::user()->first_name}}}
                             <img src="https://placehold.it/60x60" alt="" class="text-right rounded-circle">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
 
                         </div>
                     </li>
@@ -37,106 +44,7 @@
             </div>
         </div>
     </nav>
-    <div class="bg-wrap"></div>
-    <div class="container-fluid main-container">
-        <div class="row">
-            <div class="col-12">
-                <h3 class="text-white my-5"><span class="text-normal">Good Morning,</span> Sashen</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="box shadow mb-3">
-                    <h3>
-                        <span class="text-normal">Message from</span> CEO
-                    </h3>
-                    <div class="header-line"></div>
-                    <div class="row">
-
-                        <div class="col-md-3 col-sm-4">
-                            <img src="http://placehold.it/260x320" alt="" class="rounded img-fluid mb-3">
-                        </div>
-                        <div class="col-md-9 col-sm-8">
-                            <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis
-                            </p>
-                            <p>Aconsectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis
-                            </p>
-                            <p>
-                                Eerat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper sus </p>
-                            <h6 class="text-right mt-5">Supun Weerasinghe</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row px-30">
-            <div class="col-12">
-                <h3 class="mt-5">Daily Ingesion</h3>
-                <div class="header-line"></div>
-            </div>
-            <div class="col-md-8">
-                <video controls class="embed-responsive embed-responsive-16by9 mb-4">
-                    <source src="http://35.193.46.164/videos/Pluto%20-%20Covid%2019-1.webm" type="video/webm">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            <div class="col-md-4 pl-30">
-                <h3 class="text-primary text-medium mb-4">Hand Washing</h3>
-                <p class="text-justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam tincidunt ut laoreet dolore magna aliquam erat volutUt wisi enim </p>
-                <a href="#" class="btn btn-primary btn-block mt-5">Answer Today Questions</a>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-md-6">
-                <div class="box shadow mb-4">
-                    <div class="row">
-                        <div class="col-8">
-                            <h3 class=" ">Your Score</h3>
-                            <div class="header-line"></div>
-                        </div>
-                        <div class="col-4">
-                            <h3 class="float-right text-secondary">45</h3>
-                        </div>
-                    </div>
-                    <table class="table table-borderless mb-0 mt-2">
-                        <tr>
-                            <td>Hand washing</td>
-                            <td class="text-right">50</td>
-                        </tr>
-                        <tr>
-                            <td>Hand washing</td>
-                            <td class="text-right">50</td>
-                        </tr>
-                        <tr>
-                            <td>Hand washing</td>
-                            <td class="text-right">50</td>
-                        </tr>
-                        <tr>
-                            <td>Hand washing</td>
-                            <td class="text-right">50</td>
-                        </tr>
-                        <tr>
-                            <td>Hand washing</td>
-                            <td class="text-right">50</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="box shadow">
-                    <h3>Leaderboard</h3>
-                    <div class="header-line"></div>
-                    <ol>
-                        <li>Sashen Pasindu</li>
-                        <li>Sashen Pasindu</li>
-                        <li>Sashen Pasindu</li>
-                        <li>Sashen Pasindu</li>
-                        <li>Sashen Pasindu</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
+    @yield('content')
     <footer class="mt-5">
         <div class="d-flex justify-content-between  main-container">
             <div class="p-2 bd-highlight">Pluto Pro &copy; 2020</div>
