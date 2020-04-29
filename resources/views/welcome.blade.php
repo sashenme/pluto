@@ -42,21 +42,28 @@
                  </nav>
              </div>
          </div>
-         <div class="clearfix">
-            <div class="float-right">
-                <div class="homelogo">
-                    <img src="{{asset('img/Home-logo.svg')}}" alt="" style="height:30em;">
-                </div>
-            </div>
-            <div class="float-left col-md-6">
+         <div class="row clearfix">
+            <div class="float-left col-md-6 col-sm-6">
                 <div class="row">
                     <div class="tagline">
                         Managing your Comapny's <b>Health</b> and <b>Safety</b> with Industry leading Proffesionals.
                     </div>
                 </div>
-                <a href="http://plutopro.uk/login"><div class="homebtn">Login to our Education Platform</div></a>
-                <a href="http://"><div class="homebtn">Login to COVID-Tracker Platform</div></a>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <a href="http://plutopro.uk/login"><div class="homebtn">Login to our Education Platform</div></a>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <a href="http://"><div class="homebtn ">Login to COVID-Tracker Platform</div></a>
+                    </div>
+                </div>
             </div>
+            <div class="float-right col-md-6 col-sm-6">
+                <div class="homelogo">
+                    <img src="{{asset('img/Home-logo.svg')}}" alt="" style="height:30em;">
+                </div>
+            </div>
+
          </div>
         <div class="homeboxCurve"></div>
     </div>

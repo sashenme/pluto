@@ -27,7 +27,7 @@
     background-color: #ffffff;
     display: block;
     position: absolute;
-    color: #ffffff;
+    color: #0f0d0d;
     widows: 100%;
     padding: 0;
     border-radius: 3em;
@@ -69,7 +69,7 @@
 }
 
 .home-footer {
-    padding: 10px 15px;
+    padding-bottom: 0;
     bottom: 0;
     float: center;
     position: absolute;
@@ -85,7 +85,7 @@
     border: 0.3em solid #f57e3f;
     border-radius: 3em;
     color: #ffffff;
-    width: 20em;
+    width: auto;
     height: auto;
     padding: 15px 32px;
     text-align: center;
