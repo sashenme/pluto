@@ -1,0 +1,41 @@
+/* Home */
+
+
+/* Home curve */
+
+.wave-container {
+    background: #04487f;
+    position: relative;
+    color: #04487f;
+    text-align: center;
+    overflow: hidden;
+}
+
+.wave-container>svg {
+    display: block;
+}
+
+.nav-home {
+    color: #ffffff;
+    background-color: #ffffff;
+    margin: 2em;
+    position: relative;
+    float: left;
+}
+
+.homebox {
+    background-color: #ffffff;
+    display: block;
+    color: #ffffff;
+    border-radius: 3em;
+    margin: 5em;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tagline {
+    position: relative;
+    float: left;
+    margin-top: 5em;
+    color: #2e2a2a;
+}
