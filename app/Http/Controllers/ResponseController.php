@@ -62,13 +62,17 @@ class ResponseController extends Controller
 
         $response->correct = $isCorrect == '1' ? 1 : 0;
 
-        if ($response->save()) {
-            if ($isCorrect == '1') {
-                return redirect()->route('dailyQuiz')->with(['status' => 'success', 'message' => 'Your answer is correct']);
-            } else {
-                return redirect()->route('dailyQuiz')->with(['status' => 'danger', 'message' => 'Your answer is wrong, correct answer is ' . $correctAnswer[0]]);
-            }
-        }
+        if (!$response->save())
+            return;
+
+        $correctResponse = ['status' => 'success', 'message' => 'Your answer is correct'];
+        $wrongResponse = ['status' => 'danger', 'message' => 'Your answer is wrong, correct answer is ' . $correctAnswer[0]];
+
+        $message = $isCorrect == '1' ? $correctResponse : $wrongResponse;
+
+        $isJSON = $request->input('json') == 1;
+
+        return $isJSON ? $message : redirect()->route('dailyQuiz')->with($message);
     }
 
     /**

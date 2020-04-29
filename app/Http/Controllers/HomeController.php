@@ -98,7 +98,7 @@ class HomeController extends Controller
             if (!empty($lastResponse)) {
                 $lastResponseQuestion_id = $lastResponse->question_id;
 
-                $question_id = Common::getNextQuestion($lastResponseQuestion_id);
+                $question_id = Common::getNextQuestionId($lastResponseQuestion_id);
 
                 if (empty($question_id)) {
                     $status = $request->session()->get('status');

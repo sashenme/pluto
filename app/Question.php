@@ -15,4 +15,8 @@ class Question extends Model
     {
         return $this->belongsTo('App\QuestionsSet','questions_set_id');
     }
+
+    public function answers(){
+        return $this->hasMany('App\Answer');
+    }
 }

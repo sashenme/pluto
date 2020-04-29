@@ -26,7 +26,7 @@ class DummyQuestionsSeeder extends Seeder
             Question::create([
                 'id' => $i,
                 'questions_set_id' => 1,
-                'title' => 'Thisis a dummy question ' . $i
+                'title' => 'This is a dummy question ' . $i
             ]);
             for ($a = 1; $a < 4; $a++) {
                 Answer::create([ 

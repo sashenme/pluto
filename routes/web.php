@@ -31,7 +31,7 @@ Route::get('/adminhome', function () {
 
 Auth::routes();
 
-
+Route::post('/daily-quiz/nextQuestion', 'QuestionController@next')->name('dailyQuiz.question.next');
 
 Route::group(['middleware' => ['role:user|admin']], function () {
     Route::resource('roles', 'RoleController');
@@ -39,6 +39,8 @@ Route::group(['middleware' => ['role:user|admin']], function () {
     Route::resource('responses', 'ResponseController');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/daily-quiz/{id?}', 'HomeController@dailyQuiz')->name('dailyQuiz');
+
+    
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {

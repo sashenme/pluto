@@ -8,6 +8,7 @@ use App\Question;
 use App\QuestionsSet;
 use App\User;
 use App\Http\Resources\Question as QuestionResource;
+use App\Libraries\Common;
 
 class QuestionController extends Controller
 {
@@ -172,5 +173,20 @@ class QuestionController extends Controller
             return redirect()->route('questions.index')->with('success', 'Question and Answers are deleted successufully!');
             // return new QuestionResource($question);
         }
+    }
+
+    /**
+     * JSON output for ajax questions
+     */
+    public function next()
+    {
+        $nextQuestionId = Common::getNextQuestionId();
+
+        if (empty($nextQuestionId))
+            return NULL;
+
+        $nextQuestion = Question::with('answers')->find($nextQuestionId);
+
+        return $nextQuestion;
     }
 }

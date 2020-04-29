@@ -11,29 +11,28 @@
     </div>
 </div>
 <div class="container-fluid main-container">
-    @if(session()->has('status'))
-    <div class="alert alert-{{session('status')}}">
+    
+    <div id="daily-quiz-status" class="alert alert-{{session('status')}}" @if(!session()->has('status')) style="display:none;" @endif >
         {{ session('message') }}
     </div>
-    @endif
 
-    <form action="{{route('responses.store')}}" method="POST">
+    <form id="daily-quiz-form" action="{{route('responses.store')}}" method="POST" data-next-action="{{route('dailyQuiz.question.next')}}">
 
         <input type="hidden" name="question_id" value="{{$questions->id}}">
         <?php $answers = App\Answer::where('question_id', $questions->id)->get() ?>
 
-        <h2 class="text-center my-5">{{$questions->title}}</h2>
-        <div class="answers text-center">
+        <h2 id="daily-quiz-question" class="text-center my-5">{{$questions->title}}</h2>
+        <div id="daily-quiz-answers" class="answers text-center">
             @foreach($answers as $answer)
             <input class="" type="radio" id="answer-{{$answer->id}}" name="answer_id" value="{{$answer->id}}">
-            <!-- <label class="custom-control-label"></label> -->
+
             <label class="answer" for="answer-{{$answer->id}}">{{$answer->name}}</label>
             @endforeach
         </div>
         {{csrf_field()}}
 
 
-        <button type="submit" class="btn btn-primary text-center d-block mx-auto mt-5">Submit</button>
+        <button type="submit" class="btn btn-primary text-center d-block mx-auto mt-5" disabled>Submit</button>
     </form>
 </div>
 @endsection
