@@ -51,28 +51,30 @@ class ResponseController extends Controller
         $answer = $request->input('answer_id');
         $question_id = $request->input('question_id');
 
-        $isCorrect = Answer::where('id', $answer)->pluck('correct')->first();
+        $isCorrect = Answer::where('id', $answer)->pluck('correct')->first() == '1';
 
-        $correctAnswer = Answer::where('question_id', $question_id)->where('correct', 1)->pluck('name');
+        $correctAnswer = Answer::where('question_id', $question_id)->where('correct', 1)->first();
 
         $response =   new Response;
         $response->user_id = Auth::id();
         $response->question_id = $request->input('question_id');
         $response->answer_id = $request->input('answer_id');
 
-        $response->correct = $isCorrect == '1' ? 1 : 0;
+        $response->correct = $isCorrect ? 1 : 0;
 
         if (!$response->save())
             return;
 
         $correctResponse = ['status' => 'success', 'message' => 'Your answer is correct'];
-        $wrongResponse = ['status' => 'danger', 'message' => 'Your answer is wrong, correct answer is ' . $correctAnswer[0]];
+        $wrongResponse = ['status' => 'danger', 'message' => 'Your answer is wrong, correct answer is ' . $correctAnswer->name];
 
         $message = $isCorrect == '1' ? $correctResponse : $wrongResponse;
 
         $isJSON = $request->input('json') == 1;
 
-        return $isJSON ? $message : redirect()->route('dailyQuiz')->with($message);
+        $nextQuestion = QuestionController::next();
+
+        return $isJSON ? compact('isCorrect', 'correctAnswer', 'nextQuestion') : redirect()->route('dailyQuiz')->with($message);
     }
 
     /**

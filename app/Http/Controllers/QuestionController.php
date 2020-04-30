@@ -176,9 +176,9 @@ class QuestionController extends Controller
     }
 
     /**
-     * JSON output for ajax questions
+     * Return next question
      */
-    public function next()
+    public static function next()
     {
         $nextQuestionId = Common::getNextQuestionId();
 

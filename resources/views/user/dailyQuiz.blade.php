@@ -16,7 +16,7 @@
         {{ session('message') }}
     </div>
 
-    <form id="daily-quiz-form" action="{{route('responses.store')}}" method="POST" data-next-action="{{route('dailyQuiz.question.next')}}">
+    <form id="daily-quiz-form" action="{{route('responses.store')}}" method="POST" data-sbt="1">
 
         <input type="hidden" name="question_id" value="{{$questions->id}}">
         <?php $answers = App\Answer::where('question_id', $questions->id)->get() ?>
@@ -31,6 +31,7 @@
         </div>
         {{csrf_field()}}
 
+        <p id="daily-quiz-answer-reason" class="text-center"></p>
 
         <button type="submit" class="btn btn-primary text-center d-block mx-auto mt-5" disabled>Submit</button>
     </form>

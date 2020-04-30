@@ -31,22 +31,20 @@ Route::get('/adminhome', function () {
 
 Auth::routes();
 
-Route::post('/daily-quiz/nextQuestion', 'QuestionController@next')->name('dailyQuiz.question.next');
-
 Route::group(['middleware' => ['role:user|admin']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
     Route::resource('responses', 'ResponseController');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/daily-quiz/{id?}', 'HomeController@dailyQuiz')->name('dailyQuiz');
-
-    
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    
     Route::get('/admin', function () {
         return view('admin.home');
     })->name('admin');
+
     Route::post('/user/{id}/updateUser', 'UserController@update')->name('updateUser');
     Route::resource('questions-sets', 'QuestionsSetController');
     Route::post('/questions-sets/{id}/update-questions-sets', 'QuestionsSetController@update')->name('updateQuestionSets');

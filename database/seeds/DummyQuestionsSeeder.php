@@ -29,10 +29,11 @@ class DummyQuestionsSeeder extends Seeder
                 'title' => 'This is a dummy question ' . $i
             ]);
             for ($a = 1; $a < 4; $a++) {
-                Answer::create([ 
+                Answer::create([
                     'question_id' => $i,
                     'name' => 'Answer ' . $a,
-                    'correct' => $a == 2 ? true : false
+                    'correct' => $a == 2 ? true : false,
+                    'reason' => 'Some good reason'
                 ]);
             }
         }
