@@ -4,6 +4,17 @@ $.ajaxSetup({
     },
 });
 
+setInterval(function () {
+    pollUserSession();
+}, $('meta[name="session-poll-seconds"]').attr("content"));
+
+function pollUserSession(){
+    $.ajax({
+        url:$('meta[name="session-poll-url"]').attr("content"),
+        method:"POST",
+    });
+}
+
 /*
 Daily Quiz : Start
 */

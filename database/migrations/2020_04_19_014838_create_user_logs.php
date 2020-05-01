@@ -16,7 +16,7 @@ class CreateUserLogs extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->time('session_time');
+            $table->time('session_time')->default('00:00:00');
             $table->timestamps();
             $table->foreign('user_id')
             ->references('id')->on('users')
