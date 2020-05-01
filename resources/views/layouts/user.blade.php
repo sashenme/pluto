@@ -7,18 +7,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>User - Logged</title>
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-    
+
 </head>
 
 <body>
     <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
         <div class="container-fluid main-container">
             <a href="/" class="navbar-brand d-flex w-50 mr-auto">
-                <img src="{{asset('img/logo.png')}}" alt=""></a>
+                <img src="{{asset('img/pluto-logo.svg')}}" alt="" style="height:7vh;"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                 <span class="navbar-toggler-icon"></span>
             </button>
