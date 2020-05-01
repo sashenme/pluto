@@ -54,9 +54,13 @@ $("#daily-quiz-form").on("submit", function (e) {
                     .addClass("text-success");
 
                 $("#daily-quiz-answer-reason")
-                    .text(data.correctAnswer.reason)
                     .removeClass("text-success, text-danger")
                     .addClass(data.isCorrect ? "text-success" : "text-danger");
+
+                data.answers.forEach(function (answer) {
+                    $("#daily-quiz-answer-reason").append(answer.reason + "<br>");
+                });
+
 
                 submitBtnEl.attr("disabled", false);
                 setSubmitButtonActionState(false);

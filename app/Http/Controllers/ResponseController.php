@@ -3,127 +3,120 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
-use Illuminate\Http\Request;
-use App\Response;
-use App\Question;
 use App\Http\Resources\Response as ResponseResource;
+use App\Response;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ResponseController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $Response = Response::orderBy('id', 'DESC')->paginate(5);
+class ResponseController extends Controller {
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index() {
+		$Response = Response::orderBy('id', 'DESC')->paginate(5);
 
-        return ResponseResource::collection($Response);
-    }
+		return ResponseResource::collection($Response);
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create() {
+		//
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request) {
 
-        $this->validate($request, [
-            'question_id' => 'required',
-            'answer_id' => 'required'
-        ]);
+		$this->validate($request, [
+			'question_id' => 'required',
+			'answer_id' => 'required',
+		]);
 
-        $next = $request->input('next');
-        $answer = $request->input('answer_id');
-        $question_id = $request->input('question_id');
+		$next = $request->input('next');
+		$answer = $request->input('answer_id');
+		$question_id = $request->input('question_id');
 
-        $isCorrect = Answer::where('id', $answer)->pluck('correct')->first() == '1';
+		$isCorrect = Answer::where('id', $answer)->pluck('correct')->first() == '1';
 
-        $correctAnswer = Answer::where('question_id', $question_id)->where('correct', 1)->first();
+		$correctAnswer = Answer::where('question_id', $question_id)->where('correct', 1)->first();
 
-        $response =   new Response;
-        $response->user_id = Auth::id();
-        $response->question_id = $request->input('question_id');
-        $response->answer_id = $request->input('answer_id');
+		$response = new Response;
+		$response->user_id = Auth::id();
+		$response->question_id = $request->input('question_id');
+		$response->answer_id = $request->input('answer_id');
 
-        $response->correct = $isCorrect ? 1 : 0;
+		$response->correct = $isCorrect ? 1 : 0;
 
-        if (!$response->save())
-            return;
+		if (!$response->save()) {
+			return;
+		}
 
-        $correctResponse = ['status' => 'success', 'message' => 'Your answer is correct'];
-        $wrongResponse = ['status' => 'danger', 'message' => 'Your answer is wrong, correct answer is ' . $correctAnswer->name];
+		$correctResponse = ['status' => 'success', 'message' => 'Your answer is correct'];
+		$wrongResponse = ['status' => 'danger', 'message' => 'Your answer is wrong, correct answer is ' . $correctAnswer->name];
 
-        $message = $isCorrect == '1' ? $correctResponse : $wrongResponse;
+		$message = $isCorrect == '1' ? $correctResponse : $wrongResponse;
 
-        $isJSON = $request->input('json') == 1;
+		$isJSON = $request->input('json') == 1;
 
-        $nextQuestion = QuestionController::next();
+		$answers = Answer::where('question_id', $question_id)->get();
+		$nextQuestion = QuestionController::next();
 
-        return $isJSON ? compact('isCorrect', 'correctAnswer', 'nextQuestion') : redirect()->route('dailyQuiz')->with($message);
-    }
+		return $isJSON ? compact('isCorrect', 'answers', 'correctAnswer', 'nextQuestion') : redirect()->route('dailyQuiz')->with($message);
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $response =  Response::findOrFail($id);
-        return new ResponseResource($response);
-    }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id) {
+		$response = Response::findOrFail($id);
+		return new ResponseResource($response);
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($id) {
+		//
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, $id) {
+		//
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $response = Response::findOrFail($id);
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($id) {
+		$response = Response::findOrFail($id);
 
-        if ($response->delete()) {
-            return new ResponseResource($response);
-        }
-    }
+		if ($response->delete()) {
+			return new ResponseResource($response);
+		}
+	}
 }
