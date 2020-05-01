@@ -12,8 +12,8 @@
     </head>
 
 <body>
-<div class="row">
-    <div class="homebox col-md-11 col-sm-12">
+<div class="d-flex justify-content-center">
+    <div class="homebox col-md-10 col-sm-12">
         <div class="clearfix">
              <div class="float-left">
                  <nav class="nav-home navbar-expand-lg navbar-light">
@@ -51,10 +51,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
-                        <a href="http://plutopro.uk/login"><div class="homebtn">Login to our Education Platform</div></a>
+                        <a href="./login"><div class="homebtn">Login to our Education Platform</div></a>
                     </div>
                     <div class="col-md-6 col-sm-6">
-                        <a href="http://"><div class="homebtn ">Login to COVID-Tracker Platform</div></a>
+                        <a href="#"><div class="homebtn ">Login to COVID-Tracker Platform</div></a>
                     </div>
                 </div>
             </div>

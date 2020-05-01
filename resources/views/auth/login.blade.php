@@ -1,78 +1,63 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-     <div class="row justify-content-center" style="margin-top:10%;">
-                <div class="logo-front"  >
-                    <img src="/dist/img/logo-small-361.png" alt="">
-                </div>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Eduaction Platform Login|Pluto</title>
+    <link rel="stylesheet" href="{{asset('css/login.css')}}">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="box-container">
+        <img class="wave" src="img/login-wave.png">
+        <div class="container">
+            <div class="img">
+                <img src="img/login-bg.svg">
             </div>
-    <div class="row justify-content-center" style="margin-top:-17%;">
-        <div class="col-md-5 col-sm-12 justify-content-center">
-                <div class="card elevation-2" style="margin-top:50%">
-                    {{-- <div class="card-header"></div> --}}
-
-                    <div class="card-body" style="margin-top:5%;">
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-
-                            <div class="form-group row">
-                                <label for="employee_id" class="col-md-4 col-form-label text-md-right">{{ __('Employee ID') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="employee_id" type="text" class="form-control @error('employee_id') is-invalid @enderror" name="employee_id" value="{{ old('employee_id') }}" required autocomplete="employee_id" autofocus>
-
-                                    @error('employee_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{--
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                       <label class="form-check-label" for="remember">
-                                            {{ __('Remember Me') }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-block bg-gradient-success btn-lg">
-                                        {{ __('Login') }}
-                                    </button>
-
-                                    {{-- @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
-                                        </a>
-                                    @endif --}}
-                                </div>
-                            </div>
-                        </form>
+            <div class="login-content">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <img src="img/pluto-logo.svg">
+                    <h2 class="title">Education Platform Login</h2>
+                    <div class="input-div one">
+                    <div class="i">
+                            <i class="fas fa-user"></i>
                     </div>
-                </div>
+                    <div class="div">
+                            <h5>Employee ID</h5>
+                                <input id="employee_id" type="text" class="input @error('employee_id') is-invalid @enderror" name="employee_id" value="{{ old('employee_id') }}" required autocomplete="employee_id" autofocus>
+
+                    </div>
+                    </div>
+                    <div class="input-div pass">
+                    <div class="i">
+                            <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                            <h5>Password</h5>
+                            <input id="password" type="password" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                    </div>
+                    </div>
+                    <a href="#">Forgot Password?</a>
+                    <div class="div">
+                        @error('employee_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                        @enderror
+                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                        @enderror
+
+                    </div>
+                    <input type="submit" class="btn" value="{{ __('Login') }}">
+                </form>
             </div>
+        </div>
     </div>
-</div>
-@endsection
+        <script type="text/javascript" src="{{asset('js/login.js')}}"></script>
+</body>
+</html>
