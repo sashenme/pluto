@@ -14,7 +14,7 @@ class AddResonToAnswersTable extends Migration
     public function up()
     {
         Schema::table('answers', function (Blueprint $table) {
-            $table->text('reason')->after('name');
+            $table->text('reason')->after('name')->nullable();
         });
     }
 
