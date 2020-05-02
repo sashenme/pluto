@@ -35,6 +35,9 @@ Route::group(['middleware' => ['role:user|admin']], function () {
 	Route::get('/daily-quiz/{id?}', 'HomeController@dailyQuiz')->name('dailyQuiz');
 
 	Route::post('poll-user-session', 'LogController@store')->name('log.store');
+
+	Route::resource('covid');
+	Route::get('/covid-selfcheck', 'CovidController@create')->name('covidSelfCheck');
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
@@ -49,8 +52,4 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 	Route::resource('questions', 'QuestionController');
 	Route::post('/questions/{id}/updateQuestions', 'QuestionController@update')->name('updateQuestions');
 	Route::resource('answers', 'AnswerController');
-});
-
-Route::get('/logged', function () {
-	return view('layouts.user');
 });
