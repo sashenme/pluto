@@ -241,23 +241,7 @@ $(document).ready(function () {
     });
 
 
-    $('#insert_form').on("submit", function (event) {
-        event.preventDefault();
-        $.ajax({
-            url: "./save.php",
-            method: "POST",
-            data: $('#insert_form').serialize(),
-            beforeSend: function () {
-                console.log("data added");
 
-            },
-            success: function (data) {
-                // $('#insert_form')[0].reset();
-                console.log(data);
-
-            }
-        });
-    });
 
     $('#feedback_form').on("submit", function (event) {
         event.preventDefault();

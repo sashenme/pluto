@@ -10,6 +10,7 @@
     <meta property="og:description " content="Use this self-assessment tool to help determine whether you need be tested for COVID-19" />
     <meta property="og:image" content="https://covidselfcheck.com/img/og-image.jpg" />
     <meta name="twitter:image" content="https://covidselfcheck.com/img/og-image-twitter.jpg">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('covid/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://code.jquery.com/ui/jquery-ui-git.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap" rel="stylesheet">
@@ -197,9 +198,9 @@
                     health status for coronavirus.
                 </h5>
                 <div class="form-group d-none">
-                    <form id="insert_form" method="POST">
+                    <form method="POST" id="insert_form">
+                        {{csrf_field()}}
                         <input type="text" id="txt-language" name="txt-language">
-                        <input type="text" id="user_id" name="user_id" value="{{{ Auth::user()->id}}}">
                         <input type="text" id="txt-q0" name="txt-q0">
                         <input type="text" id="txt-q1" name="txt-q1">
                         <input type="text" id="txt-q2" name="txt-q2">
@@ -588,6 +589,48 @@
     <script>
         var age = <?php echo Auth::user()->age; ?>;
         var gender = <?php echo Auth::user()->gender; ?>
+
+        $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            $('#insert_form').on("submit", function(event) {
+                event.preventDefault();
+
+
+
+                $.ajax({
+                    url: "{{url('api/covid-save')}}",
+                    type: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "lang": "si",
+                        "critical": 0,
+                        "txt-q1": 0,
+                        "txt-q2": 0,
+                        "txt-q3": 0,
+                        "txt-q4": 0,
+                        "txt-q5": 0,
+                        "txt-q6": 0,
+                        "txt-q7": 0,
+                        "txt-q8": 0,
+                        "recommendation": 5
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                });
+            });
+
+
+
+
+        });
     </script>
     <script src="{{asset('covid/js/main.js')}}"></script>
     <script src="{{asset('covid/js/angular.min.js')}}"></script>
