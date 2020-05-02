@@ -145,8 +145,6 @@ $(function () {
 });
 
 $(document).ready(function () {
-    $('#descrimination').modal('show');
-
 
     questions = questionsEN;
     //Starting Screen
@@ -187,9 +185,9 @@ $(document).ready(function () {
         showQuestion(currentQuestion);
 
 
-        $(".icon-info").attr("src", "img/icon-" + gender + "-info.png");
-        $(".icon-warning").attr("src", "img/icon-" + gender + "-warning.png");
-        $(".icon-danger").attr("src", "img/icon-" + gender + "-danger.png");
+        $(".icon-info").attr("src", "covid/img/icon-" + gender + "-info.png");
+        $(".icon-warning").attr("src", "covid/img/icon-" + gender + "-warning.png");
+        $(".icon-danger").attr("src", "covid/img/icon-" + gender + "-danger.png");
 
 
         $("#btn-yes").click(function () {
@@ -269,7 +267,7 @@ $(document).ready(function () {
             method: "POST",
             data: $('#feedback_form').serialize(),
             beforeSend: function () {
-              
+
 
             },
             success: function (data) {
@@ -458,7 +456,7 @@ function showRecommendation(key) {
     $("#rec-" + key).show();
     $("#txt-recommendation").val(key);
     $("#submit-btn").trigger('click');
-   
+
     switch (key) {
         case "1":
             riskLevel = 70;
@@ -468,21 +466,21 @@ function showRecommendation(key) {
             break;
         case "3":
             riskLevel = 0;
-            $("#rec-3 .risk-mark").css("margin-left","-6px");
-            $("#rec-3 i").css("margin-left","0");
+            $("#rec-3 .risk-mark").css("margin-left", "-6px");
+            $("#rec-3 i").css("margin-left", "0");
             break;
         case "4":
             riskLevel = 60;
             break;
         case "5":
             riskLevel = 100;
-            $("#rec-5 .risk-mark").css("margin-left","-24px");
-            $("#rec-5 i").css("margin-left","-17px");
+            $("#rec-5 .risk-mark").css("margin-left", "-24px");
+            $("#rec-5 i").css("margin-left", "-17px");
             break;
 
     }
     // if(key == 3)
-    
+
 
     setTimeout(() => {
         console.log(riskLevel);

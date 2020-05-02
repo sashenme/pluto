@@ -199,8 +199,6 @@
                 <div class="form-group d-none">
                     <form id="insert_form" method="POST">
                         <input type="text" id="txt-language" name="txt-language">
-                        <input type="text" id="txt-gender" name="txt-gender">
-                        <input type="text" id="txt-age" name="txt-age">
                         <input type="text" id="txt-q0" name="txt-q0">
                         <input type="text" id="txt-q1" name="txt-q1">
                         <input type="text" id="txt-q2" name="txt-q2">
@@ -608,42 +606,6 @@
         </div>
     </div>
 
-
-
-    <div class="modal fade" id="descrimination" tabindex="-1" role="dialog" aria-labelledby="descriminationLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="descriminationLabel" translate="descriTitle">Disclaimer</h5>
-
-                </div>
-                <div class="modal-body">
-                    <p class="text-justify" translate="descriPara1">
-                        This online self assessment tool does not provide medical advice, It is intended for
-                        informational purposes only. It is not a substitute for professional medical advice, diagnosis
-                        or treatment. Never ignore professional medical advice in seeking treatment. If you think you
-                        may have a medical emergency, immediately call your district Medical Officer of Health or dial
-                        1390.
-                        <br>
-                        <br>
-                        Digital Humanitarians Sri Lanka ( The Creators of this tool ) exclude any liability for any
-                        medical situation due to not contacting a medical expert to check in a situation requiring
-                        medical assistance.
-                    </p>
-
-
-
-                    <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#descrimination" translate="iAgree">I
-                        Agree</button>
-                    <p class="text-justify agree-text" translate="descriPara2">
-                        I agree that I exclude any liability on the part of the creators ( Digital Humanitarians Sri
-                        Lanka ) for any health consequences and medical emergencies suffered due to not seeking medical
-                        advice as needed.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="{{asset('covid/js/jquery.min.js')}}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
