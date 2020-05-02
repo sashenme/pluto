@@ -36,7 +36,7 @@ Route::group(['middleware' => ['role:user|admin']], function () {
 
 	Route::post('poll-user-session', 'LogController@store')->name('log.store');
 
-	Route::resource('covid');
+	Route::resource('covid', 'CovidController');
 	Route::get('/covid-selfcheck', 'CovidController@create')->name('covidSelfCheck');
 });
 
