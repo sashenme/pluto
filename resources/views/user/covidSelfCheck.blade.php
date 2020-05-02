@@ -216,36 +216,8 @@
         </div>
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
-                <div class="card shadow age">
-                    <h1 class="text-center mb-3" translate="howOld"><strong>How old are you?</strong></h1>
-                    <h2 class="text-center"><span translate="yearsSiTa"></span> <span id="age">25</span> <span translate="yearsEng"></span></h2>
-                    <div class="row">
-                        <div class="slider-box">
 
-                            <input type="text" id="priceRange" readonly>
-                            <!-- <span>Years</span> -->
-                            <div id="price-range" class="slider"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <button class="text-center btn-secondary btn-lg btn center-block" id="age-btn" translate="ok">Ok</button>
-                    </div>
-                </div>
-                <div class="card shadow gender hide-this">
-                    <h4 class="text-center mb-5" translate="selectGender"><strong>Select Gender</strong></h4>
-                    <div class="row">
 
-                        <div class="col-6">
-
-                            <img src="{{asset('covid/img/icon-1-info.png')}}" alt="" class="icon btn-male" id="btn-male">
-                            <p class="text-center btn-male" translate="male">Male</p>
-                        </div>
-                        <div class="col-6">
-                            <img src="{{asset('covid/img/icon-0-info.png')}}" alt="" class="icon btn-female" id="btn-female">
-                            <p class="text-center btn-female" translate="female">Female</p>
-                        </div>
-                    </div>
-                </div>
                 <div class="card shadow questions">
                     <img src="" alt="" class="icon" id="q-icon">
                     <h1 class="text-center" id="q-title"></h1>
@@ -612,6 +584,10 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+        var age = 60;
+        var gender = 0;
+    </script>
     <script src="{{asset('covid/js/main.js')}}"></script>
     <script src="{{asset('covid/js/angular.min.js')}}"></script>
     <script src="{{asset('covid/js/angular-translate.min.js')}}"></script>

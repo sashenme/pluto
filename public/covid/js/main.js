@@ -118,7 +118,6 @@ var questionsTA = [{
 
 
 var language = 'english';
-var gender = 0;
 var answers = [];
 var currentQuestion = 0;
 
@@ -157,25 +156,24 @@ $(document).ready(function () {
     $("#return").hide();
     $(".guide").hide();
 
-    $("#age-btn").click(function () {
-        $(".gender").show();
-        $('.age').hide();
-        age = $("#priceRange").val();
-        $("#txt-age").val(age);
+    // $("#age-btn").click(function () {
+    //     $(".gender").show();
+    //     $('.age').hide();
+    //     age = $("#priceRange").val();
+    //     $("#txt-age").val(age);
 
-    });
+    // });
 
-    $(".btn-male").click(function () {
-        startQuestionare(1);
-        $("#txt-gender").val(1);
-    });
-    $(".btn-female").click(function () {
-        startQuestionare(0);
-        $("#txt-gender").val(0);
-    });
+    // $(".btn-male").click(function () {
+    //     startQuestionare(1);
+    //     $("#txt-gender").val(1);
+    // });
+    // $(".btn-female").click(function () {
+    //     startQuestionare(0);
+    //     $("#txt-gender").val(0);
+    // });
 
     function startQuestionare(getGender) {
-
 
         gender = getGender;
         $(".gender").hide();
@@ -219,9 +217,9 @@ $(document).ready(function () {
 
 
     $('.btn-sinhala').click(function () {
-        console.log($(this).parents().parent());
         questions = questionsLK;
         showQuestion(currentQuestion, true);
+
     });
     $('.btn-english').click(function () {
         questions = questionsEN;
@@ -239,6 +237,7 @@ $(document).ready(function () {
         $(".loading").fadeOut();
 
         $("#txt-language").val($(this).attr('data-language'));
+        startQuestionare(gender);
     });
 
 
@@ -294,7 +293,7 @@ function showQuestion(q, langRefresh) {
     }
     if (currentQuestion < questions.length) {
         console.log(gender);
-        $("#q-icon").attr("src", "img/icon-" + gender + currentQuestion + ".png");
+        $("#q-icon").attr("src", "covid/img/icon-" + gender + currentQuestion + ".png");
 
 
         $("#q-title").html(questions[currentQuestion].title);
