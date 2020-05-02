@@ -149,7 +149,7 @@
     </div>
 
     <nav class="ng-scope navbar navbar-expand-lg navbar-dark main-container" ng-controller="Ctrl">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{{route('covidSelfCheck')}}">
             <img src="{{asset('covid/img/dhsl.svg')}}" alt="ata" width="120">
         </a>
         <ul class="navbar-nav justify-content-center" id="language">
@@ -267,7 +267,7 @@
                         If you are experiencing other symptoms like Tiredness, Aches and Pains, Nasal Congestion, Runny
                         Nose, Sore Throat, Diarrhoea and want assessment contact: <a href='tel:1390'>1390</a> or your
                         district MOH Office immediately </p>
-                    <a class="text-center btn-primary btn-lg btn" href="index.html" translate="startOver">Start
+                    <a class="text-center btn-primary btn-lg btn" href="{{route('covidSelfCheck')}}" translate="startOver">Start
                         Over!</a>
                 </div>
                 <div class="card shadow recommendation" id="rec-2">
@@ -304,7 +304,7 @@
                         your district MOH office immediately.
                     </p>
                     <div class="row">
-                        <a class="text-center btn-primary btn-lg btn" href="index.html" translate="startOver">Start
+                        <a class="text-center btn-primary btn-lg btn" href="{{route('covidSelfCheck')}}" translate="startOver">Start
                             Over!</a>
                     </div>
 
@@ -329,7 +329,7 @@
                         <a href='tel:1390' class="btn btn-danger btn-lg text-center my-4" translate="callNow">Call
                             Now</a>
                     </div>
-                    <a class="text-center link" href="index.html" translate="startOver">Start Over!</a>
+                    <a class="text-center link" href="{{route('covidSelfCheck')}}" translate="startOver">Start Over!</a>
                 </div>
                 <div class="card shadow recommendation" id="rec-4">
                     <div class="risk-meter mb-5">
@@ -370,7 +370,7 @@
                         If your symptoms worsen, or if you are concerned, please call <a href='tel:1390'>1390</a> or
                         your district MOH office immediately.
                     </p>
-                    <a class="text-center btn-primary btn-lg btn" href="index.html" translate="startOver">Start
+                    <a class="text-center btn-primary btn-lg btn" href="{{route('covidSelfCheck')}}" translate="startOver">Start
                         Over!</a>
                 </div>
                 <div class="card shadow recommendation" id="rec-5">
@@ -417,7 +417,7 @@
                         your hands for at least 20 seconds, Avoid touching your face.
 
                     </p>
-                    <a class="text-center btn-primary btn-lg btn" href="index.html" translate="startOver">Start
+                    <a class="text-center btn-primary btn-lg btn" href="{{route('covidSelfCheck')}}" translate="startOver">Start
                         Over!</a>
                 </div>
                 <div class="card shadow guide" id="guide">
