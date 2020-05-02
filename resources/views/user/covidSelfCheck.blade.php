@@ -199,6 +199,7 @@
                 <div class="form-group d-none">
                     <form id="insert_form" method="POST">
                         <input type="text" id="txt-language" name="txt-language">
+                        <input type="text" id="user_id" name="user_id" value="{{{ Auth::user()->id}}}">
                         <input type="text" id="txt-q0" name="txt-q0">
                         <input type="text" id="txt-q1" name="txt-q1">
                         <input type="text" id="txt-q2" name="txt-q2">
@@ -585,8 +586,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script>
-        var age = 60;
-        var gender = 0;
+        var age = <?php echo Auth::user()->age; ?>;
+        var gender = <?php echo Auth::user()->gender; ?>
     </script>
     <script src="{{asset('covid/js/main.js')}}"></script>
     <script src="{{asset('covid/js/angular.min.js')}}"></script>
