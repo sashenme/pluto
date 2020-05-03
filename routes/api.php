@@ -59,4 +59,4 @@ use Illuminate\Support\Facades\Route;
 // Route::post('feedbacks','FeedbackController@store'); 
 // Route::put('feedback','FeedbackController@store');
 // Route::delete('feedback/{id}','FeedbackController@destroy');
-Route::post('covid-save', 'CovidController@store');
+

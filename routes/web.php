@@ -38,6 +38,7 @@ Route::group(['middleware' => ['role:user|admin']], function () {
 
 	Route::resource('covids', 'CovidController');
 	Route::get('/covid-selfcheck', 'CovidController@create')->name('covidSelfCheck');
+	Route::post('covid-save', 'CovidController@store')->name('covidselfcheck.store');
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {

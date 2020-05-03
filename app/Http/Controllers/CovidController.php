@@ -38,7 +38,7 @@ class CovidController extends Controller
     public function store(Request $request)
     {
         $covid = new Covid;
-        $covid->user_id = $request->input('user_id');
+        $covid->user_id = Auth::id();
         $covid->lang = $request->input('lang');
         $covid->critical = $request->input('critical');
         $covid->q1 = $request->input('txt-q1');
@@ -54,7 +54,7 @@ class CovidController extends Controller
         if ($covid->save()) {
             return new CovidResource($covid);
         } else {
-            return 'soemthign wrrong';
+            abort(500);
         }
     }
 

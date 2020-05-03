@@ -16,24 +16,6 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('covid/css/main.css')}}">
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-PZ97LJ2');
-    </script>
-    <!-- End Google Tag Manager -->
     <style>
         .loading {
             position: fixed;
@@ -605,7 +587,7 @@
 
 
                 $.ajax({
-                    url: "{{url('api/covid-save')}}",
+                    url: "{{route('covidselfcheck.store')}}",
                     type: "POST",
                     data: {
                         "_token": "{{ csrf_token() }}",
