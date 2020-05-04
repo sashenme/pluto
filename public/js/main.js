@@ -4,14 +4,14 @@ $.ajaxSetup({
     },
 });
 
-setInterval(function () {
+setInterval(function() {
     pollUserSession();
 }, $('meta[name="session-poll-seconds"]').attr("content"));
 
-function pollUserSession(){
+function pollUserSession() {
     $.ajax({
-        url:$('meta[name="session-poll-url"]').attr("content"),
-        method:"POST",
+        url: $('meta[name="session-poll-url"]').attr("content"),
+        method: "POST",
     });
 }
 
@@ -21,11 +21,11 @@ Daily Quiz : Start
 var nextQuestion = null;
 
 //Enable submit button
-$('#daily-quiz-form [name="answer_id"]').click(function () {
+$('#daily-quiz-form [name="answer_id"]').click(function() {
     $('#daily-quiz-form [type="Submit"]').attr("disabled", false);
 });
 
-$("#daily-quiz-form").on("submit", function (e) {
+$("#daily-quiz-form").on("submit", function(e) {
     e.preventDefault();
 
     var formId = "#" + $(this).attr("id");
@@ -56,7 +56,7 @@ $("#daily-quiz-form").on("submit", function (e) {
                 answer_id: selectedAnswerEl.val(),
                 json: 1,
             },
-            success: function (data) {
+            success: function(data) {
                 $(`[for="answer-${selectedAnswerEl.val()}"]`).addClass(
                     "text-danger"
                 );
@@ -68,8 +68,8 @@ $("#daily-quiz-form").on("submit", function (e) {
                     .removeClass("text-success, text-danger")
                     .addClass(data.isCorrect ? "text-success" : "text-danger");
 
-                data.answers.forEach(function (answer) {
-                    $("#daily-quiz-answer-reason").append(answer.reason + "<br>");
+                data.answers.forEach(function(answer) {
+                    $("#daily-quiz-answer-reason").addClass(data.isCorrect ? "text-success" : "text-danger").append(`${answer.name}  - ${answer.reason}<br>`);
                 });
 
 
@@ -79,7 +79,7 @@ $("#daily-quiz-form").on("submit", function (e) {
                 nextQuestion = data.nextQuestion;
                 if (!nextQuestion) submitBtnEl.text("Finish");
             },
-            error: function () {
+            error: function() {
                 location.reload();
             },
         });
@@ -92,7 +92,7 @@ $("#daily-quiz-form").on("submit", function (e) {
         questionIdEl.val(nextQuestion.id);
         $("#daily-quiz-answers, #daily-quiz-answer-reason").html("");
 
-        nextQuestion.answers.forEach(function (answer) {
+        nextQuestion.answers.forEach(function(answer) {
             $(
                 "#daily-quiz-answers"
             ).append(`<input type="radio" id="answer-${answer.id}" name="answer_id" value="${answer.id}">

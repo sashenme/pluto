@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-
+    <script src="https://kit.fontawesome.com/e9573268dd.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 
                 <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
                     <li class="nav-item">
-                        <a href="{{route('covidSelfCheck')}}" class="nav-link mt-3 text-primary">Covid Selfcheck</a>
+                        <a href="{{route('covidSelfCheck')}}" class="nav-link mt-3 btn btn-primary btn-block text-white"><span class="fas fa-tasks"></span> | Covid Selfcheck</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

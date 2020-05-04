@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COVID-19 Self Assessment Online - Digital Humanitarians Sri Lanka</title>
+    <title>COVID-19 Self Assessment Online</title>
     <meta name="description" content="Use this self-assessment tool to help determine whether you need be tested for COVID-19.">
     <meta property="og:title" content="COVID-19 Self Assessment Tool Online" />
     <meta property="og:description " content="Use this self-assessment tool to help determine whether you need be tested for COVID-19" />
@@ -24,7 +24,7 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            background: #1ca093ef;
+            background: #1f4e8bef;
         }
 
         .lds-ellipsis {
@@ -109,7 +109,7 @@
 
     <div class="loading">
         <div class="language-check">
-            <ul class="ng-scope " ng-controller="Ctrl">
+            <ul class="ng-scope " ng-controller="Ctrl"
 
                 <li class="nav-item">
                     <a class="ng-scope language-btn btn-sinhala" ng-click="changeLanguage('lk')" id="" data-lang="btn-sinhala" data-language="si">සිංහල</a>
@@ -131,8 +131,8 @@
     </div>
 
     <nav class="ng-scope navbar navbar-expand-lg navbar-dark main-container" ng-controller="Ctrl">
-        <a class="navbar-brand" href="{{route('covidSelfCheck')}}">
-            <img src="{{asset('covid/img/dhsl.svg')}}" alt="ata" width="120">
+        <a class="navbar-brand" href="./home">
+            <img src="{{asset('img/logo-300-white.png')}}" alt="ata" width="120">
         </a>
         <ul class="navbar-nav justify-content-center" id="language">
 
@@ -249,6 +249,7 @@
                         If you are experiencing other symptoms like Tiredness, Aches and Pains, Nasal Congestion, Runny
                         Nose, Sore Throat, Diarrhoea and want assessment contact: <a href='tel:1390'>1390</a> or your
                         district MOH Office immediately </p>
+                        <a class="text-center btn-success btn-lg btn" href="./home" translate="goHome">Go Back</a>
                     <a class="text-center btn-primary btn-lg btn" href="{{route('covidSelfCheck')}}" translate="startOver">Start
                         Over!</a>
                 </div>
@@ -286,6 +287,7 @@
                         your district MOH office immediately.
                     </p>
                     <div class="row">
+                        <a class="text-center btn-success btn-lg btn" href="./home" translate="goHome">Go Back</a>
                         <a class="text-center btn-primary btn-lg btn" href="{{route('covidSelfCheck')}}" translate="startOver">Start
                             Over!</a>
                     </div>
@@ -311,6 +313,7 @@
                         <a href='tel:1390' class="btn btn-danger btn-lg text-center my-4" translate="callNow">Call
                             Now</a>
                     </div>
+                    <a class="text-center btn-success btn-lg btn" href="./home" translate="goHome">Go Back</a>
                     <a class="text-center link" href="{{route('covidSelfCheck')}}" translate="startOver">Start Over!</a>
                 </div>
                 <div class="card shadow recommendation" id="rec-4">
@@ -352,6 +355,7 @@
                         If your symptoms worsen, or if you are concerned, please call <a href='tel:1390'>1390</a> or
                         your district MOH office immediately.
                     </p>
+                    <a class="text-center btn-success btn-lg btn" href="./home" translate="goHome">Go Back</a>
                     <a class="text-center btn-primary btn-lg btn" href="{{route('covidSelfCheck')}}" translate="startOver">Start
                         Over!</a>
                 </div>
@@ -399,6 +403,7 @@
                         your hands for at least 20 seconds, Avoid touching your face.
 
                     </p>
+                    <a class="text-center btn-success btn-lg btn" href="./home" translate="goHome">Go Back</a>
                     <a class="text-center btn-primary btn-lg btn" href="{{route('covidSelfCheck')}}" translate="startOver">Start
                         Over!</a>
                 </div>
@@ -440,128 +445,12 @@
                     <br>
                     <button class="link btn mt-4" id="return" translate="returnBack">Return to previous
                         question</button>
+                        <button class="link btn mt-4" id="goHome" translate="goHome">Go to Home Page</button>
                 </div>
-                <p class="text-center small text-secondary">
-                    Made with <span style="color: #e25555;">&hearts;</span> in Sri Lanka<br>
-                    <a href="https://www.facebook.com/DigitalHumanitariansSL/" target="_blank">Digital Humanitarians Sri
-                        Lanka Crisis Response</a>
-                    <br>
-                    <button class="btn btn-sm btn-secondary text-center mt-2 small" data-toggle="modal" data-target="#moreInfo">More
-                        Info</button>
-                    <button class="btn btn-sm btn-dark text-center mt-2 small" data-toggle="modal" data-target="#feedbackForm">Say Something</button>
-                </p>
                 <p></p>
             </div>
         </div>
     </div>
-
-
-
-    <div class="modal fade" id="moreInfo" tabindex="-1" role="dialog" aria-labelledby="moreInfoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="moreInfoLabel">More Information</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="text-justify">
-                        This trilingual online COVID19 self-assessment tool was made by the volunteers at Digital
-                        Humanitarians Sri Lanka under the guidance & supervision of Sri Lankan Medical Professionals and
-                        Medical Undergraduates.
-                    </p>
-                    <h6>Humans Behind This Project
-                    </h6>
-                    <ul>
-                        <li>Iroshan Kulatunga</li>
-                        <li>Sashen Pasindu <small>( Engineering and UX/UI Development )</small></li>
-                        <li>Kavinga Yapa Abeywardena</li>
-                        <li>Dilara Abeygunaratne</li>
-                        <li>Dr. Ridma Wijesundara</li>
-                        <li>Vositha Wijenayake</li>
-                        <li>Thadshajiny Kandasamy</li>
-                        <li>Miyuru Samarasinghe</li>
-                        <li>Praba Ponnambalam</li>
-                        <li>Thambaru Wijesekara</li>
-                        <li>Susith Dharmawardena</li>
-                    </ul>
-                    <h6>Our Technology Stack</h6>
-                    <ul>
-                        <li><a href="https://angularjs.org">AngularJS</a></li>
-                        <li><a href="https://jquery.com">jQuery</a></li>
-                        <li><a href="https://angular-translate.github.io/">Angular Translate</a></li>
-                        <li><a href="https://getbootstrap.com">Bootstrap</a></li>
-                        <li><a href="https://freepik.com">Freepik</a></li>
-                        <li><a href="https://fontawesome.com/">FontAwesome</a></li>
-                    </ul>
-
-                    <p>Share This Website, Let's do our part to stop the community spread.</p>
-                    <ul class="list-inline  social">
-                        <li class="list-inline-item">
-                            <a href="https://api.whatsapp.com/send?phone=&text=https://covidselfcheck.com">
-                                <span class="fa-stack ">
-                                    <i class="fas fa-circle fa-stack-2x whatsapp"></i>
-                                    <i class="fab fa-whatsapp fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcovidselfcheck.com">
-                                <span class="fa-stack ">
-                                    <i class="fas fa-circle fa-stack-2x facebook"></i>
-                                    <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="https://twitter.com/intent/tweet/?text=&url=https%3A%2F%2Fcovidselfcheck.com">
-                                <span class="fa-stack ">
-                                    <i class="fas fa-circle fa-stack-2x twitter"></i>
-                                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-
-                        <li class="list-inline-item">
-                            <a href="mailto:?subject=&body=https%3A%2F%2Fcovidselfcheck.com">
-                                <span class="fa-stack ">
-                                    <i class="fas fa-circle fa-stack-2x email"></i>
-                                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="feedbackForm" tabindex="-1" role="dialog" aria-labelledby="feedbackFormLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="feedbackFormLabel">Feedback Form</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" id="feedback_form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Name" name="txt-name" id="txt-name" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="txt-comment" id="txt-comment" rows="5" class="form-control" required placeholder="Write your comment"></textarea>
-                        </div>
-                        <button class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <script src="{{asset('covid/js/jquery.min.js')}}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
